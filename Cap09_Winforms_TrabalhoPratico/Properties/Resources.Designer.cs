@@ -79,5 +79,15 @@ namespace Cap09_Winforms_TrabalhoPratico.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Wallpapper {
+            get {
+                object obj = ResourceManager.GetObject("Wallpapper", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

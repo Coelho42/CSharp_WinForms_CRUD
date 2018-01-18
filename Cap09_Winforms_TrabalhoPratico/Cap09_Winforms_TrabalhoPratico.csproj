@@ -67,21 +67,48 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Equipa.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="FormEntidadeEquipasLista.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FormEntidadeEquipasLista.Designer.cs">
+      <DependentUpon>FormEntidadeEquipasLista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controlo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controlo.Designer.cs">
+      <DependentUpon>Controlo.cs</DependentUpon>
     </Compile>
     <Compile Include="Jogador.cs" />
+    <Compile Include="FormEntidadeJogadoresLista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEntidadeJogadoresLista.Designer.cs">
+      <DependentUpon>FormEntidadeJogadoresLista.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Treinador.cs" />
+    <Compile Include="FormEntidadeTreinadoresLista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEntidadeTreinadoresLista.Designer.cs">
+      <DependentUpon>FormEntidadeTreinadoresLista.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Controlo.resx">
+      <DependentUpon>Controlo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEntidadeEquipasLista.resx">
+      <DependentUpon>FormEntidadeEquipasLista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEntidadeJogadoresLista.resx">
+      <DependentUpon>FormEntidadeJogadoresLista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEntidadeTreinadoresLista.resx">
+      <DependentUpon>FormEntidadeTreinadoresLista.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -123,6 +150,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wallpapper.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,8 +15,6 @@ namespace Cap09_Winforms_TrabalhoPratico
         public About()
         {
             InitializeComponent();
-        }
-
-      
+        }     
     }
 }

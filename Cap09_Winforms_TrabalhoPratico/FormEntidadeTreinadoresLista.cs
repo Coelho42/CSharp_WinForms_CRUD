@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace Cap09_Winforms_TrabalhoPratico
 {
-    public partial class Form1 : Form
+    public partial class Treinadores : Form
     {
-        public Form1()
+        public Treinadores()
         {
             InitializeComponent();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            About formAbout = new About();
-            formAbout.Show();
-            this.Hide();
         }
     }
 }

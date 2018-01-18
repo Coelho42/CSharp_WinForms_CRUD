@@ -67,6 +67,12 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Equipa.cs" />
+    <Compile Include="FormEntidadeEquipasDetalhes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEntidadeEquipasDetalhes.Designer.cs">
+      <DependentUpon>FormEntidadeEquipasDetalhes.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormEntidadeEquipasLista.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,18 @@
     </Compile>
     <Compile Include="Controlo.Designer.cs">
       <DependentUpon>Controlo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEntidadeJogadoresDetalhes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEntidadeJogadoresDetalhes.Designer.cs">
+      <DependentUpon>FormEntidadeJogadoresDetalhes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEntidadeTreinadoresDetalhes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEntidadeTreinadoresDetalhes.Designer.cs">
+      <DependentUpon>FormEntidadeTreinadoresDetalhes.cs</DependentUpon>
     </Compile>
     <Compile Include="Jogador.cs" />
     <Compile Include="FormEntidadeJogadoresLista.cs">
@@ -101,11 +119,20 @@
     <EmbeddedResource Include="Controlo.resx">
       <DependentUpon>Controlo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEntidadeEquipasDetalhes.resx">
+      <DependentUpon>FormEntidadeEquipasDetalhes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormEntidadeEquipasLista.resx">
       <DependentUpon>FormEntidadeEquipasLista.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEntidadeJogadoresDetalhes.resx">
+      <DependentUpon>FormEntidadeJogadoresDetalhes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormEntidadeJogadoresLista.resx">
       <DependentUpon>FormEntidadeJogadoresLista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEntidadeTreinadoresDetalhes.resx">
+      <DependentUpon>FormEntidadeTreinadoresDetalhes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEntidadeTreinadoresLista.resx">
       <DependentUpon>FormEntidadeTreinadoresLista.cs</DependentUpon>

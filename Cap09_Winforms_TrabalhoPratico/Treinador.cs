@@ -36,7 +36,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// <summary>
         /// Esté é um método que está encarregado da criação dos treinadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
         /// </summary>
-        public void Add(ref List<Treinador> listaTreinador)
+        public void Add(List<Treinador> listaTreinador)
         {
             throw new System.Exception("Not implemented");
         }
@@ -44,7 +44,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// <summary>
         /// Esté é um método que está encarregado da edição dos treinadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
         /// </summary>
-        public void Edit(ref List<Treinador> listaTreinador)
+        public void Edit(List<Treinador> listaTreinador)
         {
             throw new System.Exception("Not implemented");
         }
@@ -52,7 +52,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// <summary>
         /// Esté é um método que está encarregado da eliminação dos treinadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
         /// </summary>
-        public void Delete(ref List<Treinador> listaTreinador)
+        public void Delete(List<Treinador> listaTreinador)
         {
             throw new System.Exception("Not implemented");
         }

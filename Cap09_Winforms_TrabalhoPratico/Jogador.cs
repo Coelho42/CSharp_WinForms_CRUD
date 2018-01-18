@@ -33,14 +33,9 @@ namespace Cap09_Winforms_TrabalhoPratico
         private long altura;
 
         /// <summary>
-        /// Esta varíavel é um boolean que checka se o jogador está inserido numa equipa ou não.
-        /// </summary>
-        private bool equipa;
-
-        /// <summary>
         /// Esté é um método que está encarregado da criação dos jogadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
         /// </summary>
-        public void Add(ref List<Jogador> listaJogador)
+        public void Add(List<Jogador> listaJogador)
         {
             throw new System.Exception("Not implemented");
         }
@@ -48,7 +43,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// <summary>
         /// Esté é um método que está encarregado da edição dos jogadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
         /// </summary>
-        public void Edit(ref List<Jogador> listaJogador)
+        public void Edit(List<Jogador> listaJogador)
         {
             throw new System.Exception("Not implemented");
         }
@@ -56,7 +51,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// <summary>
         /// Esté é um método que está encarregado da eliminação dos jogadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
         /// </summary>
-        public void Delete(ref List<Jogador> listaJogador)
+        public void Delete(List<Jogador> listaJogador)
         {
             throw new System.Exception("Not implemented");
         }

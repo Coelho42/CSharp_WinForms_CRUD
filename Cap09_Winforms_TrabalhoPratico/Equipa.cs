@@ -32,8 +32,6 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// </summary>
         private long lugar;
 
-
-
         /// <summary>
         /// Esté é um método que está encarregado da adição das equipas na lista, este tem como parâmetros de entrada os jogadores e os treinadores, e tem como método de saída void.
         /// </summary>

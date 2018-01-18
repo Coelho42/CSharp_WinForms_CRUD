@@ -12,6 +12,18 @@ namespace Cap09_Winforms_TrabalhoPratico
 {
     public partial class Controlo : Form
     {
+        public List<string> listaEquipas = new List<string>()
+        {           
+        };
+
+        public List<string> listaJogadores = new List<string>()
+        {
+        };
+
+        public List<string> listaTreinadores = new List<string>()
+        {
+        };
+
         public Controlo()
         {
             InitializeComponent();
@@ -23,22 +35,27 @@ namespace Cap09_Winforms_TrabalhoPratico
             formAbout.ShowDialog();
         }
 
-        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void equipasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Equipa formEquipa = new Equipa();
-            
-            
+            FormEntidadeEquipasLista formEquipa = new FormEntidadeEquipasLista();
+            formEquipa.ShowDialog();
         }
 
         private void jogadoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Treinador formTreinador = new Treinador();
-          
+            FormEntidadeJogadoresLista formJogador = new FormEntidadeJogadoresLista();
+            formJogador.ShowDialog();
+        }
+
+        private void treinadoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormEntidadeTreinadoresLista formTreinador = new FormEntidadeTreinadoresLista();
+            formTreinador.ShowDialog();
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

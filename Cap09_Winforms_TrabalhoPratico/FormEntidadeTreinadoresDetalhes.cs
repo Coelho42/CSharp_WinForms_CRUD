@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Cap09_Winforms_TrabalhoPratico
 {
-    public partial class FormEntidadeTreinadoresLista : Form
+    public partial class FormEntidadeTreinadoresDetalhes : Form
     {
-        public FormEntidadeTreinadoresLista()
+        public FormEntidadeTreinadoresDetalhes()
         {
             InitializeComponent();
         }

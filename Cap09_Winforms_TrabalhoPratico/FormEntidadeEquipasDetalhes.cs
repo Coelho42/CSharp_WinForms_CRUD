@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Cap09_Winforms_TrabalhoPratico
 {
-    public partial class FormEntidadeTreinadoresLista : Form
+    public partial class FormEntidadeEquipasDetalhes : Form
     {
-        public FormEntidadeTreinadoresLista()
+        public FormEntidadeEquipasDetalhes()
         {
             InitializeComponent();
+        }
+
+        private void labelEquipaConvocada_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

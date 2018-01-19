@@ -28,9 +28,14 @@ namespace Cap09_Winforms_TrabalhoPratico
         private bool convocada;
 
         /// <summary>
-        /// É uma variável do tipo long que recebe o lugar em que a equipa ficou no decorrer do torneio tartaruga, o motivo para esta ser um long deve-se ao facto de o id também ser um long e como o número de equipas que podem ser criadas é infinito, então a posição em que a equipa se encontra no torneio também pode chegar a conter bastantes digitos, o que leva esta variável a ser um long.
+        /// É uma variável do tipo string que recebe o nome da liga em que a equipa se encontra no torneio tartaruga.
         /// </summary>
-        private long lugar;
+        private string liga;
+
+        public Equipa(string nome)
+        {
+            this.nome = nome;
+        }
 
         /// <summary>
         /// Esté é um método que está encarregado da adição das equipas na lista, este tem como parâmetros de entrada os jogadores e os treinadores, e tem como método de saída void.
@@ -58,6 +63,15 @@ namespace Cap09_Winforms_TrabalhoPratico
         public void Delete(ref Jogador jogador, ref Treinador treinador, ref List<Equipa> listaEquipa)
         {
             throw new System.Exception("Not implemented");
+        }
+
+        public string GetNome()
+        {
+            return this.nome;
+        }
+        public void SetNome (string nome)
+        {
+            this.nome = nome;
         }
     }
 }

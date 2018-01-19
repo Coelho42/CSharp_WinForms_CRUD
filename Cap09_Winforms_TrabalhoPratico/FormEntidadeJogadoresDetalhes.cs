@@ -15,16 +15,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         public FormEntidadeJogadoresDetalhes()
         {
             InitializeComponent();
-        }
-
-        public void refresh()
-        {
-            listaEquipas.Clear();
-            foreach (String gato in listaEquipas)
-            {
-                listViewGatos.Items.Add(gato);
-            }
-        }
+        }      
 
         private void label1_Click(object sender, EventArgs e)
         {

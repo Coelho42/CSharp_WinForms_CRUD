@@ -12,17 +12,11 @@ namespace Cap09_Winforms_TrabalhoPratico
 {
     public partial class Controlo : Form
     {
-        public List<string> listaEquipas = new List<string>()
-        {           
-        };
+        private List<Equipa> listaEquipas = new List<Equipa>();
 
-        public List<string> listaJogadores = new List<string>()
-        {
-        };
+        private List<Jogador> listaJogadores = new List<Jogador>();
 
-        public List<string> listaTreinadores = new List<string>()
-        {
-        };
+        private List<Treinador> listaTreinadores = new List<Treinador>();
 
         public Controlo()
         {
@@ -56,6 +50,29 @@ namespace Cap09_Winforms_TrabalhoPratico
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Controlo_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Equipa nomeEquipa = new Equipa("yolo");
+                listaEquipas.Add(nomeEquipa);
+            }
+
+            foreach (Equipa nome in listaEquipas)
+            {
+                ListViewItem listEquipas = new ListViewItem(
+                     new[]
+                    {
+                         nome.GetNome()
+                    });
+                listViewEquipas.Items.Add(listEquipas);
+            }                              
         }
     }
 }

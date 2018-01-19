@@ -127,7 +127,6 @@
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "FormEntidadeJogadoresLista";
             this.Text = "Jogadores";
             this.ResumeLayout(false);
             this.PerformLayout();

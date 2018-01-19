@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace Cap09_Winforms_TrabalhoPratico
 {
     public partial class FormEntidadeEquipasLista : Form
-    {
+    {    
 
         public FormEntidadeEquipasLista()
         {

@@ -74,28 +74,26 @@ namespace Cap09_Winforms_TrabalhoPratico
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SerializarDesserializar dados = new SerializarDesserializar(listaEquipas, listaJogadores, listaTreinadores);
-            String caminho = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\data.bin";
+            DialogResult = saveFileDialog.ShowDialog();
 
-            Serializar(caminho, dados);
+            if (DialogResult == DialogResult.OK)
+            {
+                SerializarDesserializar dados = new SerializarDesserializar(listaEquipas, listaJogadores, listaTreinadores);
+                Serializar(saveFileDialog.FileName, dados);
+            }               
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string caminho = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\data.bin";
 
-            // Apenas tenta carregar caso o file existir
-            if (System.IO.File.Exists(caminho))
+            DialogResult = openFileDialog.ShowDialog();
+            if (DialogResult == DialogResult.OK)
             {
-                SerializarDesserializar dados = (SerializarDesserializar)Desserializar(caminho);
+                SerializarDesserializar dados = (SerializarDesserializar)Desserializar(openFileDialog.FileName);
                 listaEquipas = dados.GetListaEquipasSer();
-                listaJogadores= dados.GetListaJogadorSer();
-                listaTreinadores = dados.GetListaTreinadoresSer();           
-            }
-            else
-            {
-                MessageBox.Show("Nao ha nenhum file para carregar!");
-            }
+                listaJogadores = dados.GetListaJogadorSer();
+                listaTreinadores = dados.GetListaTreinadoresSer();
+            }            
         }
 
         /// <summary>
@@ -105,7 +103,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// <param name="fileLocation"> string com a localização e nome do file onde sera gravado o objeto </param>
         /// <param name="obj"> Objeto a serualizar (Object é o topo da hierarquia dos objetos nas POO) </param>
         public static void Serializar(string fileLocation, Object obj)
-        {
+        {         
             try
             {
                 Stream streamToFile = File.OpenWrite(fileLocation);     // Cria Stream para abrir a escrever no file

@@ -12,15 +12,31 @@ namespace Cap09_Winforms_TrabalhoPratico
 {
     public partial class Controlo : Form
     {
-        private List<Equipa> listaEquipas = new List<Equipa>();
+        static List<Equipa> listaEquipas = new List<Equipa>();
 
-        private List<Jogador> listaJogadores = new List<Jogador>();
+        static List<Jogador> listaJogadores = new List<Jogador>();
 
-        private List<Treinador> listaTreinadores = new List<Treinador>();
+        static List<Treinador> listaTreinadores = new List<Treinador>();
+
 
         public Controlo()
         {
             InitializeComponent();
+        }
+
+        public static List<Equipa> GetListaEquipas()
+        {
+            return listaEquipas;
+        }
+
+        public static List<Jogador> GetListaJogadores()
+        {
+            return listaJogadores;
+        }
+
+        public static List<Treinador> GetListaTreinadores()
+        {
+            return listaTreinadores;
         }
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,29 +66,6 @@ namespace Cap09_Winforms_TrabalhoPratico
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void Controlo_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                Equipa nomeEquipa = new Equipa("yolo");
-                listaEquipas.Add(nomeEquipa);
-            }
-
-            foreach (Equipa nome in listaEquipas)
-            {
-                ListViewItem listEquipas = new ListViewItem(
-                     new[]
-                    {
-                         nome.GetNome()
-                    });
-                listViewEquipas.Items.Add(listEquipas);
-            }                              
         }
     }
 }

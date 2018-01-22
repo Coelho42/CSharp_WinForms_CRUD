@@ -12,63 +12,76 @@ namespace Cap09_Winforms_TrabalhoPratico
 {
     public partial class FormEntidadeJogadoresLista : Form
     {
-        private List<string> listaJogadores = new List<string>()
-        {
-        };
+        string strAction;
+        int selectedIndex;
 
         public FormEntidadeJogadoresLista()
         {
             InitializeComponent();
         }
-
         public void refresh()
         {
-            listViewJogador.Clear();
-            foreach (string jogador in listaJogadores)
-            {
-                listViewJogador.Items.Add(jogador);
+            listViewJogador.Items.Clear();
+            foreach (Jogador Jogador in Controlo.GetListaJogadores())
+            {                            
+                ListViewItem listJogadores = new ListViewItem(
+                     new[]
+                    {
+                         Jogador.getNome(), Jogador.getIdade().ToString(), Jogador.getAltura().ToString()
+                    });
+                listViewJogador.Items.Add(listJogadores);
             }
         }
 
         private void buttonAdicionar_Click(object sender, EventArgs e)
         {
-            //listaJogadores.Add(textBoxNome.Text);
+            strAction = "Gravar";
+            FormEntidadeJogadoresDetalhes formJogadoresDetalhes = new FormEntidadeJogadoresDetalhes(strAction, selectedIndex);
+            formJogadoresDetalhes.ShowDialog();
             refresh();
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
+            strAction = "Alterar";
             if (listViewJogador.SelectedIndices.Count > 0)
             {
-                int selectedIndex = listViewJogador.SelectedIndices[0];
-                //listaJogadores[selectedIndex] = textBoxNome.Text;
-
+                selectedIndex = listViewJogador.SelectedIndices[0];
+                FormEntidadeJogadoresDetalhes formJogadoresDetalhes = new FormEntidadeJogadoresDetalhes(strAction, selectedIndex);
+                formJogadoresDetalhes.ShowDialog();
                 refresh();
             }
             else
             {
-                MessageBox.Show("Selecione um Jogador");
+                MessageBox.Show("Selecione um Jogador antes de tentar editar.");
             }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
+            strAction = "Apagar";
+
             if (listViewJogador.SelectedIndices.Count > 0)
             {
-                int selectedIndex = listViewJogador.SelectedIndices[0];
-                listaJogadores.RemoveAt(selectedIndex);
-
+                selectedIndex = listViewJogador.SelectedIndices[0];
+                FormEntidadeJogadoresDetalhes formJogadoresDetalhes = new FormEntidadeJogadoresDetalhes(strAction, selectedIndex);
+                formJogadoresDetalhes.ShowDialog();
                 refresh();
             }
             else
             {
-                MessageBox.Show("Selecione um Jogador");
+                MessageBox.Show("Selecione um Jogador antes de tentar eliminar");
             }
         }
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             refresh();
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

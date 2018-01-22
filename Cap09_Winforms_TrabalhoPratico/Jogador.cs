@@ -10,7 +10,7 @@ namespace Cap09_Winforms_TrabalhoPratico
     /// Esta classe é utilizada na criação dos Jogadores, esta contem 4 atributos que destiguem os jogadores uns dos outros e contem 3 métodos para a criação , edição e eliminação de um ou mais jogadores para que estes participem no calendário de jogos do torneio tartaruga.
     /// </summary>
     
-    class Jogador
+    public class Jogador
     {
         /// <summary>
         /// É uma variável do tipo long que recebe o id dos jogadores, pois os jogadores que podem ser criados são infinitos ou seja o id pode chegar a ter vários digitos, logo tem de ser um long
@@ -32,28 +32,40 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// </summary>
         private long altura;
 
-        /// <summary>
-        /// Esté é um método que está encarregado da criação dos jogadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
-        /// </summary>
-        public void Add(List<Jogador> listaJogador)
+        public Jogador(string nome, int idade, long altura)
         {
-            throw new System.Exception("Not implemented");
+            this.nome = nome;
+            this.idade = idade;
+            this.altura = altura;
         }
 
-        /// <summary>
-        /// Esté é um método que está encarregado da edição dos jogadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
-        /// </summary>
-        public void Edit(List<Jogador> listaJogador)
+        public string getNome()
         {
-            throw new System.Exception("Not implemented");
+            return this.nome;
+        }
+        public void setNome(string nome)
+        {
+            this.nome = nome;
         }
 
-        /// <summary>
-        /// Esté é um método que está encarregado da eliminação dos jogadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
-        /// </summary>
-        public void Delete(List<Jogador> listaJogador)
+        public int getIdade()
         {
-            throw new System.Exception("Not implemented");
+            return this.idade;
+        }
+        public void setIdade(int idade)
+        {
+            this.idade = idade;
+        }
+
+        public long getAltura()
+        {
+            return this.altura;
+        }
+        public void setAltura(long altura)
+        {
+            this.altura = altura;
         }
     }
 }
+    
+

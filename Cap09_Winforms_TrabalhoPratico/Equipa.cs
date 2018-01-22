@@ -10,7 +10,7 @@ namespace Cap09_Winforms_TrabalhoPratico
     /// Esta classe é utilizada na criação das equipas, esta contem 4 atributos que destiguem as equipas umas nas outras e contem 3 métodos para a criação , edição e eliminação de uma equipa para participar no calendário de jogos do torneio tartaruga.
     /// </summary>
 
-    class Equipa
+    public class Equipa
     {
         /// <summary>
         /// É uma variável do tipo long que recebe o id das equipas, pois as equipas que podem ser criadas são infinitas ou seja o id pode chegar a ter vários digitos, logo tem de ser um long.
@@ -32,46 +32,38 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// </summary>
         private string liga;
 
-        public Equipa(string nome)
+        public Equipa(string nome, bool convocada, string liga)
         {
             this.nome = nome;
+            this.convocada = convocada;
+            this.liga = liga;
         }
-
-        /// <summary>
-        /// Esté é um método que está encarregado da adição das equipas na lista, este tem como parâmetros de entrada os jogadores e os treinadores, e tem como método de saída void.
-        /// </summary>
-        /// <param name="jogador">Recebe o jogador do tipo classe Jogador para ser criada a equipa</param>
-        /// <param name="treinador">Recebe o treinador do tipo classe Treinador para ser criada</param>
-        public void Add(ref Jogador jogador, ref Treinador treinador, ref List<Equipa> listaEquipa)
-        {
-            throw new System.Exception("Not implemented");
-        }
-        /// <summary>
-        /// Esté é um método que está encarregado da edição das equipas na lista, anteriormente criadas, este tem como parâmetros de entrada os jogadores e os treinadores, e tem como método de saída void.
-        /// </summary>
-        /// <param name="jogador">Recebe o jogador do tipo classe Jogador para ser editado</param>
-        /// <param name="treinador">Recebe o treinador do tipo classe Treinador para ser editado</param>
-        public void Edit(ref Jogador jogador, ref Treinador treinador, ref List<Equipa> listaEquipa)
-        {
-            throw new System.Exception("Not implemented");
-        }
-        /// <summary>
-        /// Esté é um método que está encarregado de eliminar equipas na lista,anteriormente criadas ou editadas, este tem como parâmetros de entrada os jogadores e os treinadores, e tem como método de saída void.
-        /// </summary>
-        /// <param name="jogador">Recebe o jogador do tipo classe Jogador</param>
-        /// <param name="treinador">Recebe o treinador do tipo classe Treinador</param>
-        public void Delete(ref Jogador jogador, ref Treinador treinador, ref List<Equipa> listaEquipa)
-        {
-            throw new System.Exception("Not implemented");
-        }
-
-        public string GetNome()
+            
+        public string getNome()
         {
             return this.nome;
         }
-        public void SetNome (string nome)
+        public void setNome (string nome)
         {
             this.nome = nome;
+        }
+
+        public bool getConvocada()
+        {
+            return this.convocada;
+        }
+        public void setConvocada(bool convocada)
+        {
+            this.convocada = convocada;
+        }
+
+        public string getLiga()
+        {
+            return this.liga;
+        }
+        public void setLiga(string liga)
+        {
+            this.liga = liga;
         }
     }
 }

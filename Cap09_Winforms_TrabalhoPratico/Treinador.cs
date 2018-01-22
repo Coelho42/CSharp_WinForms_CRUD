@@ -10,7 +10,7 @@ namespace Cap09_Winforms_TrabalhoPratico
     /// Esta classe é utilizada na criação dos Jogadores, esta contem 4 atributos que destiguem os trienadores uns dos outros e contem 3 métodos para a criação , edição e eliminação de um ou mais treinadores para que estes participem no calendário de jogos do torneio tartaruga.
     /// </summary>
     
-    class Treinador
+    public class Treinador
     {
         /// <summary>
         /// É uma variável do tipo long que recebe o id dos treinadores, pois os treinadores que podem ser criados são infinitos ou seja o id pode chegar a ter vários digitos, logo tem de ser um long
@@ -32,29 +32,38 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// </summary>
         private bool equipa;
 
-
-        /// <summary>
-        /// Esté é um método que está encarregado da criação dos treinadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
-        /// </summary>
-        public void Add(List<Treinador> listaTreinador)
+        public Treinador(string nome, int idade, bool equipa)
         {
-            throw new System.Exception("Not implemented");
+            this.nome = nome;
+            this.idade = idade;
+            this.equipa = equipa;
         }
 
-        /// <summary>
-        /// Esté é um método que está encarregado da edição dos treinadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
-        /// </summary>
-        public void Edit(List<Treinador> listaTreinador)
+        public string getNome()
         {
-            throw new System.Exception("Not implemented");
+            return this.nome;
+        }
+        public void setNome(string nome)
+        {
+            this.nome = nome;
         }
 
-        /// <summary>
-        /// Esté é um método que está encarregado da eliminação dos treinadores na lista, este não tem parâmetros de entrada, e tem como método de saída void.
-        /// </summary>
-        public void Delete(List<Treinador> listaTreinador)
+        public bool getEquipa()
         {
-            throw new System.Exception("Not implemented");
+            return this.equipa;
+        }
+        public void setEquipa(bool equipa)
+        {
+            this.equipa = equipa;
+        }
+
+        public int getIdade()
+        {
+            return this.idade;
+        }
+        public void setIdade(int idade)
+        {
+            this.idade = idade;
         }
     }
 }

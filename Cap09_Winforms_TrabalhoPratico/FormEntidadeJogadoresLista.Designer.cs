@@ -34,14 +34,16 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
-            this.Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // labelJogadores
             // 
             this.labelJogadores.AutoSize = true;
             this.labelJogadores.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelJogadores.Location = new System.Drawing.Point(43, 36);
+            this.labelJogadores.Location = new System.Drawing.Point(43, 44);
             this.labelJogadores.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelJogadores.Name = "labelJogadores";
             this.labelJogadores.Size = new System.Drawing.Size(164, 36);
@@ -51,10 +53,12 @@
             // listViewJogador
             // 
             this.listViewJogador.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Name});
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
             this.listViewJogador.GridLines = true;
-            this.listViewJogador.Location = new System.Drawing.Point(49, 75);
-            this.listViewJogador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listViewJogador.Location = new System.Drawing.Point(49, 83);
+            this.listViewJogador.Margin = new System.Windows.Forms.Padding(4);
             this.listViewJogador.Name = "listViewJogador";
             this.listViewJogador.Size = new System.Drawing.Size(591, 306);
             this.listViewJogador.TabIndex = 14;
@@ -65,8 +69,8 @@
             // buttonAdd
             // 
             this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAdd.Location = new System.Drawing.Point(49, 389);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAdd.Location = new System.Drawing.Point(49, 397);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(131, 65);
             this.buttonAdd.TabIndex = 12;
@@ -77,20 +81,20 @@
             // buttonClose
             // 
             this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonClose.Location = new System.Drawing.Point(511, 389);
-            this.buttonClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonClose.Location = new System.Drawing.Point(511, 397);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(4);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(131, 65);
             this.buttonClose.TabIndex = 11;
             this.buttonClose.Text = "Fechar Lista";
             this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonRefresh_Click);
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonDelete
             // 
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelete.Location = new System.Drawing.Point(359, 389);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonDelete.Location = new System.Drawing.Point(359, 397);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(4);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(131, 65);
             this.buttonDelete.TabIndex = 10;
@@ -101,8 +105,8 @@
             // buttonEdit
             // 
             this.buttonEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEdit.Location = new System.Drawing.Point(205, 389);
-            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonEdit.Location = new System.Drawing.Point(205, 397);
+            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(131, 65);
             this.buttonEdit.TabIndex = 9;
@@ -110,23 +114,34 @@
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
-            // Name
+            // columnHeader1
             // 
-            this.Name.Text = "Nome:";
-            this.Name.Width = 135;
+            this.columnHeader1.Text = "Nome:";
+            this.columnHeader1.Width = 70;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Idade:";
+            this.columnHeader2.Width = 75;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Altura:";
+            this.columnHeader3.Width = 67;
             // 
             // FormEntidadeJogadoresLista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(701, 495);
+            this.ClientSize = new System.Drawing.Size(708, 514);
             this.Controls.Add(this.labelJogadores);
             this.Controls.Add(this.listViewJogador);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "FormEntidadeJogadoresLista";
             this.Text = "Jogadores";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -140,6 +155,8 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonEdit;
-        private System.Windows.Forms.ColumnHeader Name;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
     }
 }

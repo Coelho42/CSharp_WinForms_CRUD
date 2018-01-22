@@ -20,6 +20,11 @@ namespace Cap09_Winforms_TrabalhoPratico
             InitializeComponent();
         }
 
+        private void FormEntidadeEquipasLista_Load(object sender, EventArgs e)
+        {
+            refresh();
+        }
+
         public void refresh()
         {
             listViewEquipa.Items.Clear();

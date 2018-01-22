@@ -51,9 +51,9 @@
             this.panelOpcoes.Controls.Add(this.menuStripOpcoes);
             this.panelOpcoes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelOpcoes.Location = new System.Drawing.Point(0, 0);
-            this.panelOpcoes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelOpcoes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelOpcoes.Name = "panelOpcoes";
-            this.panelOpcoes.Size = new System.Drawing.Size(1204, 731);
+            this.panelOpcoes.Size = new System.Drawing.Size(903, 594);
             this.panelOpcoes.TabIndex = 3;
             // 
             // labelTitle
@@ -62,10 +62,9 @@
             this.labelTitle.BackColor = System.Drawing.Color.Transparent;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.ForeColor = System.Drawing.Color.Transparent;
-            this.labelTitle.Location = new System.Drawing.Point(37, 42);
-            this.labelTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTitle.Location = new System.Drawing.Point(28, 34);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(524, 69);
+            this.labelTitle.Size = new System.Drawing.Size(426, 55);
             this.labelTitle.TabIndex = 7;
             this.labelTitle.Text = "Torneio Tartaruga";
             // 
@@ -77,8 +76,7 @@
             this.acercaDeToolStripMenuItem});
             this.menuStripOpcoes.Location = new System.Drawing.Point(0, 0);
             this.menuStripOpcoes.Name = "menuStripOpcoes";
-            this.menuStripOpcoes.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStripOpcoes.Size = new System.Drawing.Size(1204, 28);
+            this.menuStripOpcoes.Size = new System.Drawing.Size(903, 24);
             this.menuStripOpcoes.TabIndex = 8;
             this.menuStripOpcoes.Text = "menuStrip1";
             // 
@@ -92,64 +90,66 @@
             this.loadToolStripMenuItem,
             this.sairToolStripMenuItem});
             this.entidadesToolStripMenuItem.Name = "entidadesToolStripMenuItem";
-            this.entidadesToolStripMenuItem.Size = new System.Drawing.Size(78, 24);
+            this.entidadesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.entidadesToolStripMenuItem.Text = "Principal";
             // 
             // equipasToolStripMenuItem
             // 
             this.equipasToolStripMenuItem.Name = "equipasToolStripMenuItem";
-            this.equipasToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.equipasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.equipasToolStripMenuItem.Text = "Equipas";
             this.equipasToolStripMenuItem.Click += new System.EventHandler(this.equipasToolStripMenuItem_Click);
             // 
             // jogadoresToolStripMenuItem
             // 
             this.jogadoresToolStripMenuItem.Name = "jogadoresToolStripMenuItem";
-            this.jogadoresToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.jogadoresToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.jogadoresToolStripMenuItem.Text = "Jogadores";
             this.jogadoresToolStripMenuItem.Click += new System.EventHandler(this.jogadoresToolStripMenuItem_Click);
             // 
             // treinadoresToolStripMenuItem
             // 
             this.treinadoresToolStripMenuItem.Name = "treinadoresToolStripMenuItem";
-            this.treinadoresToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.treinadoresToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.treinadoresToolStripMenuItem.Text = "Treinadores";
             this.treinadoresToolStripMenuItem.Click += new System.EventHandler(this.treinadoresToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.acercaDeToolStripMenuItem.Text = "Acerca De";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
             // Controlo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1204, 731);
+            this.ClientSize = new System.Drawing.Size(903, 594);
             this.Controls.Add(this.panelOpcoes);
             this.MainMenuStrip = this.menuStripOpcoes;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Controlo";
             this.Text = "Torneio Tartaruga";
             this.panelOpcoes.ResumeLayout(false);

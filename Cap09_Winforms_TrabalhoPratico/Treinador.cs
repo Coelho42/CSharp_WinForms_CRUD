@@ -9,7 +9,8 @@ namespace Cap09_Winforms_TrabalhoPratico
     /// <summary>
     /// Esta classe é utilizada na criação dos Jogadores, esta contem 4 atributos que destiguem os trienadores uns dos outros e contem 3 métodos para a criação , edição e eliminação de um ou mais treinadores para que estes participem no calendário de jogos do torneio tartaruga.
     /// </summary>
-    
+
+    [Serializable]
     public class Treinador
     {
         /// <summary>

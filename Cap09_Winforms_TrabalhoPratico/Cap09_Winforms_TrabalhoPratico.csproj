@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializarDesserializar.cs" />
     <Compile Include="Treinador.cs" />
     <Compile Include="FormEntidadeTreinadoresLista.cs">
       <SubType>Form</SubType>

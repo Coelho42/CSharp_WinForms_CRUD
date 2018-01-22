@@ -10,6 +10,7 @@ namespace Cap09_Winforms_TrabalhoPratico
     /// Esta classe é utilizada na criação das equipas, esta contem 4 atributos que destiguem as equipas umas nas outras e contem 3 métodos para a criação , edição e eliminação de uma equipa para participar no calendário de jogos do torneio tartaruga.
     /// </summary>
 
+    [Serializable]
     public class Equipa
     {
         /// <summary>

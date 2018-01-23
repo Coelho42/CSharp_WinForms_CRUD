@@ -29,11 +29,11 @@ namespace Cap09_Winforms_TrabalhoPratico
         private int idade;
 
         /// <summary>
-        /// É uma variável do tipo int que recebe a altura dos jogadores, pois as alturas têm no máximo 3 digitos mas tem números décimais, logo tem de ser um long.
+        /// É uma variável do tipo double que recebe a altura dos jogadores, pois as alturas têm no máximo 3 digitos mas tem números décimais, logo tem de ser um long.
         /// </summary>
-        private long altura;
+        private double altura;
 
-        public Jogador(string nome, int idade, long altura)
+        public Jogador(string nome, int idade, double altura)
         {
             this.nome = nome;
             this.idade = idade;
@@ -58,11 +58,11 @@ namespace Cap09_Winforms_TrabalhoPratico
             this.idade = idade;
         }
 
-        public long getAltura()
+        public double getAltura()
         {
             return this.altura;
         }
-        public void setAltura(long altura)
+        public void setAltura(double altura)
         {
             this.altura = altura;
         }

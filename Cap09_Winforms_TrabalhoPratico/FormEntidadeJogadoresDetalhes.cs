@@ -63,7 +63,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                     }
                     else
                     {
-                        Jogador Jogador = new Jogador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToInt64(textBoxAltura.Text));
+                        Jogador Jogador = new Jogador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text));
                         Controlo.GetListaJogadores().Add(Jogador);
                         this.Close();                 
                     }
@@ -78,7 +78,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                     }
                     else
                     {
-                        Jogador Jogador = new Jogador(textBoxNome.Text, Convert.ToInt32(textBoxAltura.Text), Convert.ToInt64(textBoxAltura.Text));
+                        Jogador Jogador = new Jogador(textBoxNome.Text, Convert.ToInt32(textBoxAltura.Text), Convert.ToDouble(textBoxAltura.Text));
                         Controlo.GetListaJogadores().Add(Jogador);
                         Controlo.GetListaJogadores().Remove(Controlo.GetListaJogadores()[selectedIndex]);
                         this.Close();

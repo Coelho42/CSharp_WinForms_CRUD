@@ -30,9 +30,9 @@ namespace Cap09_Winforms_TrabalhoPratico
             switch (strAction)
             {
                 case "Gravar":
-                    textBoxNome.Text = "";
-                    textBoxIdade.Text = "";
-                    textBoxEquipa.Text = "";
+                    textBoxNome.Text.Trim();
+                    textBoxIdade.Text.Trim();
+                    textBoxEquipa.Text.Trim();
                     break;
 
                 case "Alterar":

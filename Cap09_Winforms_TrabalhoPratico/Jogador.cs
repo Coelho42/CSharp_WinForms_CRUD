@@ -13,6 +13,7 @@ namespace Cap09_Winforms_TrabalhoPratico
     [Serializable]
     public class Jogador
     {
+        #region Atributos
         /// <summary>
         /// É uma variável do tipo long que recebe o id dos jogadores, pois os jogadores que podem ser criados são infinitos ou seja o id pode chegar a ter vários digitos, logo tem de ser um long
         /// </summary>
@@ -32,14 +33,24 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// É uma variável do tipo double que recebe a altura dos jogadores, pois as alturas têm no máximo 3 digitos mas tem números décimais, logo tem de ser um long.
         /// </summary>
         private double altura;
+        #endregion
 
+        #region Construtor
+        /// <summary>
+        /// Construtor para criar um jogador
+        /// </summary>
+        /// <param name="nome">nome do jogador</param>
+        /// <param name="idade">idade do jogador</param>
+        /// <param name="altura">altura do jogador</param>
         public Jogador(string nome, int idade, double altura)
         {
             this.nome = nome;
             this.idade = idade;
             this.altura = altura;
         }
+        #endregion
 
+        #region Getters e Setters
         public string getNome()
         {
             return this.nome;
@@ -66,6 +77,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         {
             this.altura = altura;
         }
+        #endregion
     }
 }
     

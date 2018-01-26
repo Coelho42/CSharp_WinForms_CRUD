@@ -40,60 +40,67 @@
             // 
             // textBoxAltura
             // 
-            this.textBoxAltura.Location = new System.Drawing.Point(257, 294);
+            this.textBoxAltura.Location = new System.Drawing.Point(61, 232);
+            this.textBoxAltura.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxAltura.Multiline = true;
             this.textBoxAltura.Name = "textBoxAltura";
-            this.textBoxAltura.Size = new System.Drawing.Size(235, 41);
+            this.textBoxAltura.Size = new System.Drawing.Size(177, 34);
             this.textBoxAltura.TabIndex = 9;
             // 
             // textBoxIdade
             // 
-            this.textBoxIdade.Location = new System.Drawing.Point(257, 185);
+            this.textBoxIdade.Location = new System.Drawing.Point(61, 143);
+            this.textBoxIdade.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxIdade.Multiline = true;
             this.textBoxIdade.Name = "textBoxIdade";
-            this.textBoxIdade.Size = new System.Drawing.Size(235, 41);
+            this.textBoxIdade.Size = new System.Drawing.Size(177, 34);
             this.textBoxIdade.TabIndex = 8;
             // 
             // textBoxNome
             // 
-            this.textBoxNome.Location = new System.Drawing.Point(257, 75);
+            this.textBoxNome.Location = new System.Drawing.Point(61, 54);
+            this.textBoxNome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxNome.Multiline = true;
             this.textBoxNome.Name = "textBoxNome";
-            this.textBoxNome.Size = new System.Drawing.Size(235, 41);
+            this.textBoxNome.Size = new System.Drawing.Size(177, 34);
             this.textBoxNome.TabIndex = 7;
             // 
             // labelNomeJogador
             // 
             this.labelNomeJogador.AutoSize = true;
-            this.labelNomeJogador.Location = new System.Drawing.Point(202, 75);
+            this.labelNomeJogador.Location = new System.Drawing.Point(20, 54);
+            this.labelNomeJogador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNomeJogador.Name = "labelNomeJogador";
-            this.labelNomeJogador.Size = new System.Drawing.Size(49, 17);
+            this.labelNomeJogador.Size = new System.Drawing.Size(38, 13);
             this.labelNomeJogador.TabIndex = 11;
             this.labelNomeJogador.Text = "Nome:";
             // 
             // labelAlturaJogador
             // 
             this.labelAlturaJogador.AutoSize = true;
-            this.labelAlturaJogador.Location = new System.Drawing.Point(202, 294);
+            this.labelAlturaJogador.Location = new System.Drawing.Point(20, 232);
+            this.labelAlturaJogador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAlturaJogador.Name = "labelAlturaJogador";
-            this.labelAlturaJogador.Size = new System.Drawing.Size(49, 17);
+            this.labelAlturaJogador.Size = new System.Drawing.Size(37, 13);
             this.labelAlturaJogador.TabIndex = 12;
             this.labelAlturaJogador.Text = "Altura:";
             // 
             // labelIdadeJogador
             // 
             this.labelIdadeJogador.AutoSize = true;
-            this.labelIdadeJogador.Location = new System.Drawing.Point(202, 185);
+            this.labelIdadeJogador.Location = new System.Drawing.Point(20, 143);
+            this.labelIdadeJogador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelIdadeJogador.Name = "labelIdadeJogador";
-            this.labelIdadeJogador.Size = new System.Drawing.Size(47, 17);
+            this.labelIdadeJogador.Size = new System.Drawing.Size(37, 13);
             this.labelIdadeJogador.TabIndex = 13;
             this.labelIdadeJogador.Text = "Idade:";
             // 
             // buttonAction
             // 
-            this.buttonAction.Location = new System.Drawing.Point(257, 384);
+            this.buttonAction.Location = new System.Drawing.Point(61, 305);
+            this.buttonAction.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonAction.Name = "buttonAction";
-            this.buttonAction.Size = new System.Drawing.Size(101, 45);
+            this.buttonAction.Size = new System.Drawing.Size(76, 37);
             this.buttonAction.TabIndex = 14;
             this.buttonAction.Text = "\"Custom\"";
             this.buttonAction.UseVisualStyleBackColor = true;
@@ -101,9 +108,10 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(391, 384);
+            this.buttonCancel.Location = new System.Drawing.Point(161, 305);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(101, 45);
+            this.buttonCancel.Size = new System.Drawing.Size(76, 37);
             this.buttonCancel.TabIndex = 15;
             this.buttonCancel.Text = "Cancelar";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -111,9 +119,9 @@
             // 
             // FormEntidadeJogadoresDetalhes
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 475);
+            this.ClientSize = new System.Drawing.Size(297, 371);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonAction);
             this.Controls.Add(this.labelIdadeJogador);
@@ -122,6 +130,7 @@
             this.Controls.Add(this.textBoxAltura);
             this.Controls.Add(this.textBoxIdade);
             this.Controls.Add(this.textBoxNome);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormEntidadeJogadoresDetalhes";
             this.Text = "FormEntidadeJogadoresDetalhes";
             this.Load += new System.EventHandler(this.FormEntidadeJogadoresDetalhes_Load);

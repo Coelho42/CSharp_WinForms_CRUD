@@ -13,6 +13,7 @@ namespace Cap09_Winforms_TrabalhoPratico
     [Serializable]
     public class Equipa
     {
+        #region Atributos
         /// <summary>
         /// É uma variável do tipo long que recebe o id das equipas, pois as equipas que podem ser criadas são infinitas ou seja o id pode chegar a ter vários digitos, logo tem de ser um long.
         /// </summary>
@@ -32,14 +33,24 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// É uma variável do tipo string que recebe o nome da liga em que a equipa se encontra no torneio tartaruga.
         /// </summary>
         private string liga;
+        #endregion
 
+        #region Construtor
+        /// <summary>
+        /// Construtor para criar Equipas
+        /// </summary>
+        /// <param name="nome">nome da equipa</param>
+        /// <param name="convocada">checa se esta convocada ou não</param>
+        /// <param name="liga">liga da equipa</param>
         public Equipa(string nome, bool convocada, string liga)
         {
             this.nome = nome;
             this.convocada = convocada;
             this.liga = liga;
         }
-            
+        #endregion
+
+        #region Getters e Setters
         public string getNome()
         {
             return this.nome;
@@ -66,5 +77,6 @@ namespace Cap09_Winforms_TrabalhoPratico
         {
             this.liga = liga;
         }
+        #endregion
     }
 }

@@ -14,12 +14,13 @@ namespace Cap09_Winforms_TrabalhoPratico
 {
     public partial class Controlo : Form
     {
+        #region Variáveis
         static List<Equipa> listaEquipas = new List<Equipa>();
 
         static List<Jogador> listaJogadores = new List<Jogador>();
 
         static List<Treinador> listaTreinadores = new List<Treinador>();
-
+        #endregion
 
         public Controlo()
         {
@@ -96,6 +97,7 @@ namespace Cap09_Winforms_TrabalhoPratico
             }            
         }
 
+        #region Serializar e Desserializar
         /// <summary>
         /// Metodo para serializar
         /// Ao ter no parametro o tipo Object, permite receber ali qualquer objeto
@@ -152,5 +154,6 @@ namespace Cap09_Winforms_TrabalhoPratico
                 return null;        // Caso haja um erro, devolve um objeto null
             }
         }
+        #endregion
     }
 }

@@ -12,19 +12,26 @@ namespace Cap09_Winforms_TrabalhoPratico
 {
     public partial class FormEntidadeEquipasLista : Form
     {
+        #region Variáveis
         string strAction;
         int selectedIndex;
+        #endregion
 
+        #region Initalize
         public FormEntidadeEquipasLista()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Load
         private void FormEntidadeEquipasLista_Load(object sender, EventArgs e)
         {
             refresh();
         }
+        #endregion
 
+        #region Refresh
         public void refresh()
         {
             listViewEquipa.Items.Clear();
@@ -48,7 +55,9 @@ namespace Cap09_Winforms_TrabalhoPratico
                 listViewEquipa.Items.Add(listEquipas);
             }
         }
+        #endregion
 
+        #region Adicionar, Editar e Delete
         private void buttonAdicionar_Click(object sender, EventArgs e)
         {
             strAction = "Gravar";
@@ -89,6 +98,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                 MessageBox.Show("Selecione uma Equipa antes de tentar eliminar");
             }
         }
+        #endregion
 
         private void buttonClose_Click(object sender, EventArgs e)
         {

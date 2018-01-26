@@ -12,19 +12,26 @@ namespace Cap09_Winforms_TrabalhoPratico
 {
     public partial class FormEntidadeJogadoresLista : Form
     {
+        #region Variáveis
         string strAction;
         int selectedIndex;
+        #endregion
 
+        #region Initialize
         public FormEntidadeJogadoresLista()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Load
         private void FormEntidadeJogadoresLista_Load(object sender, EventArgs e)
         {
             refresh();
         }
+        #endregion
 
+        #region Refresh
         public void refresh()
         {
             listViewJogador.Items.Clear();
@@ -38,7 +45,9 @@ namespace Cap09_Winforms_TrabalhoPratico
                 listViewJogador.Items.Add(listJogadores);
             }
         }
+        #endregion
 
+        #region Adicionar, Editar e Delete
         private void buttonAdicionar_Click(object sender, EventArgs e)
         {
             strAction = "Gravar";
@@ -79,11 +88,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                 MessageBox.Show("Selecione um Jogador antes de tentar eliminar");
             }
         }
-
-        private void buttonRefresh_Click(object sender, EventArgs e)
-        {
-            refresh();
-        }
+        #endregion
 
         private void buttonClose_Click(object sender, EventArgs e)
         {

@@ -13,6 +13,7 @@ namespace Cap09_Winforms_TrabalhoPratico
     [Serializable]
     public class Treinador
     {
+        #region Atributos
         /// <summary>
         /// É uma variável do tipo long que recebe o id dos treinadores, pois os treinadores que podem ser criados são infinitos ou seja o id pode chegar a ter vários digitos, logo tem de ser um long
         /// </summary>
@@ -32,14 +33,24 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// Esta varíavel é um boolean que checka se o treinador está inserido numa equipa ou não.
         /// </summary>
         private bool equipa;
+        #endregion
 
+        #region Construtor
+        /// <summary>
+        /// Construtor para criar um treinador
+        /// </summary>
+        /// <param name="nome">nome do treinador</param>
+        /// <param name="idade">idade do treinador</param>
+        /// <param name="equipa">equipa do treinador</param>
         public Treinador(string nome, int idade, bool equipa)
         {
             this.nome = nome;
             this.idade = idade;
             this.equipa = equipa;
         }
+        #endregion
 
+        #region Getters e Setters
         public string getNome()
         {
             return this.nome;
@@ -66,5 +77,6 @@ namespace Cap09_Winforms_TrabalhoPratico
         {
             this.idade = idade;
         }
+        #endregion
     }
 }

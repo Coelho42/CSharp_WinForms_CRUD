@@ -12,10 +12,13 @@ namespace Cap09_Winforms_TrabalhoPratico
 {
     public partial class FormEntidadeEquipasDetalhes : Form
     {
+        #region Variáveis
         string strAction;
         int selectedIndex;
         bool convocada = false;
+        #endregion
 
+        #region Initialize
         public FormEntidadeEquipasDetalhes(string strAction, int selectedIndex)
         {
             InitializeComponent();
@@ -23,7 +26,9 @@ namespace Cap09_Winforms_TrabalhoPratico
             this.selectedIndex = selectedIndex;
             buttonAction.Text = strAction;
         }
+        #endregion
 
+        #region Load
         private void FormEntidadeEquipasDetalhes_Load(object sender, EventArgs e)
         {
             switch (strAction)
@@ -64,6 +69,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                     break;
             }
         }
+        #endregion
 
         private void buttonAction_Click(object sender, EventArgs e)
         {

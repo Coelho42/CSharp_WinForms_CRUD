@@ -12,11 +12,13 @@ namespace Cap09_Winforms_TrabalhoPratico
 {
     public partial class FormEntidadeTreinadoresDetalhes : Form
     {
-
+        #region Variáveis
         string strAction;
         int selectedIndex;
         bool convocada = false;
+        #endregion
 
+        #region Initialize
         public FormEntidadeTreinadoresDetalhes(string strAction, int selectedIndex)
         {
             InitializeComponent();
@@ -24,7 +26,9 @@ namespace Cap09_Winforms_TrabalhoPratico
             this.selectedIndex = selectedIndex;
             buttonAction.Text = strAction;
         }
+        #endregion
 
+        #region Load
         private void FormEntidadeTreinadoresDetalhes_Load(object sender, EventArgs e)
         {
             switch (strAction)
@@ -65,6 +69,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                     break;
             }
         }
+        #endregion
 
         private void buttonAction_Click(object sender, EventArgs e)
         {
@@ -75,23 +80,41 @@ namespace Cap09_Winforms_TrabalhoPratico
                     // Se campos vazios, erro. Caso contrário passa os dados para a formUm
                     if (textBoxNome.Text == "" || textBoxEquipa.Text == "" || textBoxIdade.Text == "")
                     {
-                        MessageBox.Show("A Equipa não pode ser criada, porfavor preencha todos os espaços.");
+                        MessageBox.Show("O Treinador não pode ser criada, porfavor preencha todos os espaços.");
                     }
                     else
                     {
+                        int idade;
+
+                        bool idadeT = Int32.TryParse(textBoxIdade.Text, out idade);
+
                         if (textBoxEquipa.Text == "S" || textBoxEquipa.Text == "s")
                         {
                             convocada = true;
-                            Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
-                            Controlo.GetListaTreinadores().Add(treinador);
-                            this.Close();
+                            if (idadeT == true)
+                            {
+                                Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
+                                Controlo.GetListaTreinadores().Add(treinador);                          
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("O que introduziu não se encontra de acordo com os parâmetros que são requeridos ...");
+                            }
                         }
                         else if (textBoxEquipa.Text == "N" || textBoxEquipa.Text == "n")
                         {
                             convocada = false;
-                            Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
-                            Controlo.GetListaTreinadores().Add(treinador);
-                            this.Close();
+                            if (idadeT == true)
+                            {
+                                Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
+                                Controlo.GetListaTreinadores().Add(treinador);
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("O que introduziu não se encontra de acordo com os parâmetros que são requeridos ... ");
+                            }
                         }
                         else
                         {
@@ -105,25 +128,43 @@ namespace Cap09_Winforms_TrabalhoPratico
                     // Se campos vazios, erro. Caso contrário passa os dados para a formUm
                     if (textBoxNome.Text == "" || textBoxEquipa.Text == "" || textBoxIdade.Text == "")
                     {
-                        MessageBox.Show("A Equipa não pode ser criada, porfavor preencha todos os espaços.");
+                        MessageBox.Show("O Treinador não pode ser criada, porfavor preencha todos os espaços.");
                     }
                     else
                     {
+                        int idade;
+
+                        bool idadeT = Int32.TryParse(textBoxIdade.Text, out idade);
+
                         if (textBoxEquipa.Text == "S" || textBoxEquipa.Text == "s")
                         {
                             convocada = true;
-                            Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
-                            Controlo.GetListaTreinadores().Add(treinador);
-                            Controlo.GetListaTreinadores().Remove(Controlo.GetListaTreinadores()[selectedIndex]);
-                            this.Close();
+                            if (idadeT == true)
+                            {
+                                Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
+                                Controlo.GetListaTreinadores().Add(treinador);
+                                Controlo.GetListaTreinadores().Remove(Controlo.GetListaTreinadores()[selectedIndex]);
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("O que introduziu não se encontra de acordo com os parâmetros que são requeridos ...");
+                            }
                         }
                         else if (textBoxEquipa.Text == "N" || textBoxEquipa.Text == "n")
                         {
                             convocada = false;
-                            Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
-                            Controlo.GetListaTreinadores().Add(treinador);
-                            Controlo.GetListaTreinadores().Remove(Controlo.GetListaTreinadores()[selectedIndex]);
-                            this.Close();
+                            if (idadeT == true)
+                            {
+                                Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
+                                Controlo.GetListaTreinadores().Add(treinador);
+                                Controlo.GetListaTreinadores().Remove(Controlo.GetListaTreinadores()[selectedIndex]);
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("O que introduziu não se encontra de acordo com os parâmetros que são requeridos ... ");
+                            }
                         }
                         else
                         {

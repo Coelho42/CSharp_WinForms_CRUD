@@ -12,9 +12,12 @@ namespace Cap09_Winforms_TrabalhoPratico
 {
     public partial class FormEntidadeJogadoresDetalhes : Form
     {
+        #region Variáveis
         string strAction;
         int selectedIndex;
+        #endregion
 
+        #region Initialize
         public FormEntidadeJogadoresDetalhes(string strAction, int selectedIndex)
         {
             InitializeComponent();
@@ -22,7 +25,9 @@ namespace Cap09_Winforms_TrabalhoPratico
             this.selectedIndex = selectedIndex;
             buttonAction.Text = strAction;
         }
+        #endregion
 
+        #region Load
         private void FormEntidadeJogadoresDetalhes_Load(object sender, EventArgs e)
         {
             switch (strAction)
@@ -49,6 +54,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                     break;
             }
         }
+        #endregion
 
         private void buttonAction_Click(object sender, EventArgs e)
         {
@@ -63,9 +69,22 @@ namespace Cap09_Winforms_TrabalhoPratico
                     }
                     else
                     {
-                        Jogador Jogador = new Jogador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text));
-                        Controlo.GetListaJogadores().Add(Jogador);
-                        this.Close();                 
+                        int idade;
+                        double altura;
+
+                        bool idadeT = Int32.TryParse(textBoxIdade.Text, out idade);
+                        bool alturaT = Double.TryParse(textBoxAltura.Text, out altura);
+
+                        if (idadeT == true && alturaT == true)
+                        {
+                            Jogador Jogador = new Jogador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text));
+                            Controlo.GetListaJogadores().Add(Jogador);
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("O que introduziu não se encontra de acordo com os parâmetros que são requeridos ...");
+                        }               
                     }
                     break;
 
@@ -78,10 +97,23 @@ namespace Cap09_Winforms_TrabalhoPratico
                     }
                     else
                     {
-                        Jogador Jogador = new Jogador(textBoxNome.Text, Convert.ToInt32(textBoxAltura.Text), Convert.ToDouble(textBoxAltura.Text));
-                        Controlo.GetListaJogadores().Add(Jogador);
-                        Controlo.GetListaJogadores().Remove(Controlo.GetListaJogadores()[selectedIndex]);
-                        this.Close();
+                        int idade;
+                        double altura;
+
+                        bool idadeT = Int32.TryParse(textBoxIdade.Text, out idade);
+                        bool alturaT = Double.TryParse(textBoxAltura.Text, out altura);
+
+                        if (idadeT == true && alturaT == true)
+                        {
+                            Jogador Jogador = new Jogador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text));
+                            Controlo.GetListaJogadores().Add(Jogador);
+                            Controlo.GetListaJogadores().Remove(Controlo.GetListaJogadores()[selectedIndex]);
+                            this.Close();
+                        }    
+                        else
+                        {
+                            MessageBox.Show("O que introduziu não se encontra de acordo com os parâmetros que são requeridos ...");
+                        }
                     }                  
                     break;
 

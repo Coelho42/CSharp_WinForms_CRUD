@@ -40,8 +40,8 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(185, 293);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCancel.Location = new System.Drawing.Point(180, 140);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(76, 37);
             this.buttonCancel.TabIndex = 31;
@@ -51,8 +51,8 @@
             // 
             // buttonAction
             // 
-            this.buttonAction.Location = new System.Drawing.Point(85, 293);
-            this.buttonAction.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAction.Location = new System.Drawing.Point(80, 140);
+            this.buttonAction.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAction.Name = "buttonAction";
             this.buttonAction.Size = new System.Drawing.Size(76, 37);
             this.buttonAction.TabIndex = 30;
@@ -63,7 +63,7 @@
             // labelEquipaLiga
             // 
             this.labelEquipaLiga.AutoSize = true;
-            this.labelEquipaLiga.Location = new System.Drawing.Point(44, 229);
+            this.labelEquipaLiga.Location = new System.Drawing.Point(38, 102);
             this.labelEquipaLiga.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelEquipaLiga.Name = "labelEquipaLiga";
             this.labelEquipaLiga.Size = new System.Drawing.Size(30, 13);
@@ -73,7 +73,7 @@
             // labelEquipaConvocada
             // 
             this.labelEquipaConvocada.AutoSize = true;
-            this.labelEquipaConvocada.Location = new System.Drawing.Point(19, 138);
+            this.labelEquipaConvocada.Location = new System.Drawing.Point(13, 64);
             this.labelEquipaConvocada.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelEquipaConvocada.Name = "labelEquipaConvocada";
             this.labelEquipaConvocada.Size = new System.Drawing.Size(65, 13);
@@ -83,7 +83,7 @@
             // labelNomeEquipas
             // 
             this.labelNomeEquipas.AutoSize = true;
-            this.labelNomeEquipas.Location = new System.Drawing.Point(44, 51);
+            this.labelNomeEquipas.Location = new System.Drawing.Point(38, 26);
             this.labelNomeEquipas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNomeEquipas.Name = "labelNomeEquipas";
             this.labelNomeEquipas.Size = new System.Drawing.Size(38, 13);
@@ -92,8 +92,8 @@
             // 
             // textBoxLiga
             // 
-            this.textBoxLiga.Location = new System.Drawing.Point(85, 229);
-            this.textBoxLiga.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxLiga.Location = new System.Drawing.Point(79, 102);
+            this.textBoxLiga.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxLiga.Multiline = true;
             this.textBoxLiga.Name = "textBoxLiga";
             this.textBoxLiga.Size = new System.Drawing.Size(177, 34);
@@ -101,8 +101,8 @@
             // 
             // textBoxConvocada
             // 
-            this.textBoxConvocada.Location = new System.Drawing.Point(85, 138);
-            this.textBoxConvocada.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxConvocada.Location = new System.Drawing.Point(79, 64);
+            this.textBoxConvocada.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxConvocada.Multiline = true;
             this.textBoxConvocada.Name = "textBoxConvocada";
             this.textBoxConvocada.Size = new System.Drawing.Size(177, 34);
@@ -110,8 +110,8 @@
             // 
             // textBoxNome
             // 
-            this.textBoxNome.Location = new System.Drawing.Point(85, 51);
-            this.textBoxNome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxNome.Location = new System.Drawing.Point(79, 26);
+            this.textBoxNome.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNome.Multiline = true;
             this.textBoxNome.Name = "textBoxNome";
             this.textBoxNome.Size = new System.Drawing.Size(177, 34);
@@ -121,7 +121,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(347, 359);
+            this.ClientSize = new System.Drawing.Size(305, 196);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonAction);
             this.Controls.Add(this.labelEquipaLiga);
@@ -130,7 +130,8 @@
             this.Controls.Add(this.textBoxLiga);
             this.Controls.Add(this.textBoxConvocada);
             this.Controls.Add(this.textBoxNome);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormEntidadeEquipasDetalhes";
             this.Text = "FormEntidadeEquipasDetalhes";
             this.Load += new System.EventHandler(this.FormEntidadeEquipasDetalhes_Load);

@@ -17,64 +17,47 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// <summary>
         /// É uma variável do tipo long que recebe o id das equipas, pois as equipas que podem ser criadas são infinitas ou seja o id pode chegar a ter vários digitos, logo tem de ser um long.
         /// </summary>
-        private long id;
+        public long id { get; internal set; }
 
         /// <summary>
         /// É uma varíavel do tipo String que atribui um nome de cada equipa.
         /// </summary>
-        private string nome;
+        public string nome { get; internal set; }
 
         /// <summary>
         /// É uma variável do tipo boolean que verifica se a equipa está ou não convocada para o torneio tartaruga, se sim a equipa é adicionada à lista de equipas, se não a equipa continua na lista de equipas criadas, mas não se encontra adicionada no torneio.
         /// </summary>
-        private bool convocada;
+        public bool convocada { get; internal set; }
 
         /// <summary>
         /// É uma variável do tipo string que recebe o nome da liga em que a equipa se encontra no torneio tartaruga.
         /// </summary>
-        private string liga;
+        public string liga { get; internal set; }
         #endregion
 
         #region Construtor
+
+        /// <summary>
+        /// Construtor Mínimo
+        /// </summary>
+        /// <param name="id"></param>
+        public Equipa(long id)
+        {
+            this.id = id;
+        }
+
         /// <summary>
         /// Construtor para criar Equipas
         /// </summary>
+        /// <param name="id">id da equipa</param>
         /// <param name="nome">nome da equipa</param>
         /// <param name="convocada">checa se esta convocada ou não</param>
         /// <param name="liga">liga da equipa</param>
-        public Equipa(string nome, bool convocada, string liga)
+        public Equipa(long id, string nome, bool convocada, string liga)
         {
+            this.id = id;
             this.nome = nome;
             this.convocada = convocada;
-            this.liga = liga;
-        }
-        #endregion
-
-        #region Getters e Setters
-        public string getNome()
-        {
-            return this.nome;
-        }
-        public void setNome (string nome)
-        {
-            this.nome = nome;
-        }
-
-        public bool getConvocada()
-        {
-            return this.convocada;
-        }
-        public void setConvocada(bool convocada)
-        {
-            this.convocada = convocada;
-        }
-
-        public string getLiga()
-        {
-            return this.liga;
-        }
-        public void setLiga(string liga)
-        {
             this.liga = liga;
         }
         #endregion

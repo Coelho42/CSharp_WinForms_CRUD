@@ -43,7 +43,7 @@
             // 
             this.labelTreinadores.AutoSize = true;
             this.labelTreinadores.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTreinadores.Location = new System.Drawing.Point(28, 32);
+            this.labelTreinadores.Location = new System.Drawing.Point(15, 12);
             this.labelTreinadores.Name = "labelTreinadores";
             this.labelTreinadores.Size = new System.Drawing.Size(156, 29);
             this.labelTreinadores.TabIndex = 22;
@@ -57,7 +57,7 @@
             this.columnHeader3});
             this.listViewTreinador.FullRowSelect = true;
             this.listViewTreinador.GridLines = true;
-            this.listViewTreinador.Location = new System.Drawing.Point(34, 64);
+            this.listViewTreinador.Location = new System.Drawing.Point(21, 44);
             this.listViewTreinador.MultiSelect = false;
             this.listViewTreinador.Name = "listViewTreinador";
             this.listViewTreinador.Size = new System.Drawing.Size(444, 249);
@@ -84,7 +84,7 @@
             // buttonAdd
             // 
             this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAdd.Location = new System.Drawing.Point(34, 319);
+            this.buttonAdd.Location = new System.Drawing.Point(21, 299);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(98, 53);
             this.buttonAdd.TabIndex = 20;
@@ -95,7 +95,7 @@
             // buttonClose
             // 
             this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonClose.Location = new System.Drawing.Point(380, 319);
+            this.buttonClose.Location = new System.Drawing.Point(367, 299);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(98, 53);
             this.buttonClose.TabIndex = 19;
@@ -106,7 +106,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelete.Location = new System.Drawing.Point(266, 319);
+            this.buttonDelete.Location = new System.Drawing.Point(253, 299);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(98, 53);
             this.buttonDelete.TabIndex = 18;
@@ -117,7 +117,7 @@
             // buttonEdit
             // 
             this.buttonEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEdit.Location = new System.Drawing.Point(151, 319);
+            this.buttonEdit.Location = new System.Drawing.Point(138, 299);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(98, 53);
             this.buttonEdit.TabIndex = 17;
@@ -129,13 +129,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(531, 418);
+            this.ClientSize = new System.Drawing.Size(498, 363);
             this.Controls.Add(this.labelTreinadores);
             this.Controls.Add(this.listViewTreinador);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormEntidadeTreinadoresLista";
             this.Text = "Treinadores";
             this.Load += new System.EventHandler(this.FormEntidadeTreinadoresLista_Load);

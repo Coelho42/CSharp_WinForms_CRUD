@@ -40,8 +40,8 @@ namespace Cap09_Winforms_TrabalhoPratico
                     break;
 
                 case "Alterar":
-                    textBoxNome.Text = Controlo.GetListaEquipas()[selectedIndex].getNome();
-                    if (Controlo.GetListaEquipas()[selectedIndex].getConvocada() == true)
+                    textBoxNome.Text = Controlo.GetListaEquipas()[selectedIndex].nome;
+                    if (Controlo.GetListaEquipas()[selectedIndex].convocada == true)
                     {
                         textBoxConvocada.Text = "Sim";
                     }
@@ -49,13 +49,13 @@ namespace Cap09_Winforms_TrabalhoPratico
                     {
                         textBoxConvocada.Text = "Não";
                     }
-                    textBoxLiga.Text = Controlo.GetListaEquipas()[selectedIndex].getLiga();
+                    textBoxLiga.Text = Controlo.GetListaEquipas()[selectedIndex].liga;
                     break;
 
                 case "Apagar":
-                    textBoxNome.Text = Controlo.GetListaEquipas()[selectedIndex].getNome();
+                    textBoxNome.Text = Controlo.GetListaEquipas()[selectedIndex].nome;
                     textBoxNome.Enabled = false;
-                    if (Controlo.GetListaEquipas()[selectedIndex].getConvocada() == true)
+                    if (Controlo.GetListaEquipas()[selectedIndex].convocada == true)
                     {
                         textBoxConvocada.Text = "Sim";
                     }
@@ -64,7 +64,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                         textBoxConvocada.Text = "Não";
                     }
                     textBoxConvocada.Enabled = false;
-                    textBoxLiga.Text = Controlo.GetListaEquipas()[selectedIndex].getLiga();
+                    textBoxLiga.Text = Controlo.GetListaEquipas()[selectedIndex].liga;
                     textBoxLiga.Enabled = false;
                     break;
             }
@@ -87,14 +87,14 @@ namespace Cap09_Winforms_TrabalhoPratico
                         if (textBoxConvocada.Text == "S" || textBoxConvocada.Text == "s")
                         {                           
                             convocada = true;
-                            Equipa Equipa = new Equipa(textBoxNome.Text, convocada, textBoxLiga.Text);
+                            Equipa Equipa = new Equipa(0, textBoxNome.Text, convocada, textBoxLiga.Text);
                             Controlo.GetListaEquipas().Add(Equipa);
                             this.Close();
                         }
                         else if (textBoxConvocada.Text == "N" || textBoxConvocada.Text == "n")
                         {
                             convocada = false;
-                            Equipa Equipa = new Equipa(textBoxNome.Text, convocada, textBoxLiga.Text);
+                            Equipa Equipa = new Equipa(0, textBoxNome.Text, convocada, textBoxLiga.Text);
                             Controlo.GetListaEquipas().Add(Equipa);
                             this.Close();
                         }
@@ -117,7 +117,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                         if (textBoxConvocada.Text == "S" || textBoxConvocada.Text == "s")
                         {
                             convocada = true;
-                            Equipa Equipa = new Equipa(textBoxNome.Text, convocada, textBoxLiga.Text);
+                            Equipa Equipa = new Equipa(0, textBoxNome.Text, convocada, textBoxLiga.Text);
                             Controlo.GetListaEquipas().Add(Equipa);
                             Controlo.GetListaEquipas().Remove(Controlo.GetListaEquipas()[selectedIndex]);
                             this.Close();
@@ -125,7 +125,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                         else if (textBoxConvocada.Text == "N" || textBoxConvocada.Text == "n")
                         {
                             convocada = false;
-                            Equipa Equipa = new Equipa(textBoxNome.Text, convocada, textBoxLiga.Text);
+                            Equipa Equipa = new Equipa(0, textBoxNome.Text, convocada, textBoxLiga.Text);
                             Controlo.GetListaEquipas().Add(Equipa);
                             Controlo.GetListaEquipas().Remove(Controlo.GetListaEquipas()[selectedIndex]);
                             this.Close();

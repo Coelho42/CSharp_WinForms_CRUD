@@ -40,7 +40,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                 ListViewItem listJogadores = new ListViewItem(
                      new[]
                     {
-                         Jogador.getNome(), Jogador.getIdade().ToString(), Jogador.getAltura().ToString()
+                         Jogador.nome, Jogador.idade.ToString(), Jogador.altura.ToString(), Jogador.posicao
                     });
                 listViewJogador.Items.Add(listJogadores);
             }
@@ -90,9 +90,11 @@ namespace Cap09_Winforms_TrabalhoPratico
         }
         #endregion
 
+        #region Close
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+        #endregion
     }
 }

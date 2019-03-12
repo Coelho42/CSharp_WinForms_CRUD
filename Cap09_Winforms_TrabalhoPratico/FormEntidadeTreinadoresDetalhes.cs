@@ -40,8 +40,8 @@ namespace Cap09_Winforms_TrabalhoPratico
                     break;
 
                 case "Alterar":
-                    textBoxNome.Text = Controlo.GetListaTreinadores()[selectedIndex].getNome();
-                    if (Controlo.GetListaTreinadores()[selectedIndex].getEquipa() == true)
+                    textBoxNome.Text = Controlo.GetListaTreinadores()[selectedIndex].nome;
+                    if (Controlo.GetListaTreinadores()[selectedIndex].equipa == true)
                     {
                         textBoxEquipa.Text = "Sim";
                     }
@@ -49,13 +49,13 @@ namespace Cap09_Winforms_TrabalhoPratico
                     {
                         textBoxEquipa.Text = "Não";
                     }
-                    textBoxIdade.Text = Controlo.GetListaTreinadores()[selectedIndex].getIdade().ToString();
+                    textBoxIdade.Text = Controlo.GetListaTreinadores()[selectedIndex].idade.ToString();
                     break;
 
                 case "Apagar":
-                    textBoxNome.Text = Controlo.GetListaTreinadores()[selectedIndex].getNome();
+                    textBoxNome.Text = Controlo.GetListaTreinadores()[selectedIndex].nome;
                     textBoxNome.Enabled = false;
-                    if (Controlo.GetListaTreinadores()[selectedIndex].getEquipa() == true)
+                    if (Controlo.GetListaTreinadores()[selectedIndex].equipa == true)
                     {
                         textBoxEquipa.Text = "Sim";
                     }
@@ -64,7 +64,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                         textBoxEquipa.Text = "Não";
                     }
                     textBoxEquipa.Enabled = false;
-                    textBoxIdade.Text = Controlo.GetListaTreinadores()[selectedIndex].getIdade().ToString();
+                    textBoxIdade.Text = Controlo.GetListaTreinadores()[selectedIndex].idade.ToString();
                     textBoxIdade.Enabled = false;
                     break;
             }
@@ -93,7 +93,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                             convocada = true;
                             if (idadeT == true)
                             {
-                                Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
+                                Treinador treinador = new Treinador(0, textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text), convocada);
                                 Controlo.GetListaTreinadores().Add(treinador);                          
                                 this.Close();
                             }
@@ -107,7 +107,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                             convocada = false;
                             if (idadeT == true)
                             {
-                                Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
+                                Treinador treinador = new Treinador(0, textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text), convocada);
                                 Controlo.GetListaTreinadores().Add(treinador);
                                 this.Close();
                             }
@@ -141,7 +141,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                             convocada = true;
                             if (idadeT == true)
                             {
-                                Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
+                                Treinador treinador = new Treinador(0, textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text), convocada);
                                 Controlo.GetListaTreinadores().Add(treinador);
                                 Controlo.GetListaTreinadores().Remove(Controlo.GetListaTreinadores()[selectedIndex]);
                                 this.Close();
@@ -156,7 +156,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                             convocada = false;
                             if (idadeT == true)
                             {
-                                Treinador treinador = new Treinador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), convocada);
+                                Treinador treinador = new Treinador(0, textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text), convocada);
                                 Controlo.GetListaTreinadores().Add(treinador);
                                 Controlo.GetListaTreinadores().Remove(Controlo.GetListaTreinadores()[selectedIndex]);
                                 this.Close();

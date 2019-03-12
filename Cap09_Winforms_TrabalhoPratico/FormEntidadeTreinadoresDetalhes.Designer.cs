@@ -36,12 +36,16 @@
             this.textBoxIdade = new System.Windows.Forms.TextBox();
             this.textBoxEquipa = new System.Windows.Forms.TextBox();
             this.textBoxNome = new System.Windows.Forms.TextBox();
+            this.labelCategoria = new System.Windows.Forms.Label();
+            this.labelAltura = new System.Windows.Forms.Label();
+            this.textBoxCategoria = new System.Windows.Forms.TextBox();
+            this.textBoxAltura = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(178, 324);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCancel.Location = new System.Drawing.Point(174, 219);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(76, 37);
             this.buttonCancel.TabIndex = 23;
@@ -51,8 +55,8 @@
             // 
             // buttonAction
             // 
-            this.buttonAction.Location = new System.Drawing.Point(77, 324);
-            this.buttonAction.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAction.Location = new System.Drawing.Point(73, 219);
+            this.buttonAction.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAction.Name = "buttonAction";
             this.buttonAction.Size = new System.Drawing.Size(76, 37);
             this.buttonAction.TabIndex = 22;
@@ -63,7 +67,7 @@
             // labelIdadeTreinador
             // 
             this.labelIdadeTreinador.AutoSize = true;
-            this.labelIdadeTreinador.Location = new System.Drawing.Point(37, 164);
+            this.labelIdadeTreinador.Location = new System.Drawing.Point(33, 67);
             this.labelIdadeTreinador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelIdadeTreinador.Name = "labelIdadeTreinador";
             this.labelIdadeTreinador.Size = new System.Drawing.Size(37, 13);
@@ -73,17 +77,17 @@
             // labelEquipaTreinador
             // 
             this.labelEquipaTreinador.AutoSize = true;
-            this.labelEquipaTreinador.Location = new System.Drawing.Point(4, 249);
+            this.labelEquipaTreinador.Location = new System.Drawing.Point(26, 181);
             this.labelEquipaTreinador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelEquipaTreinador.Name = "labelEquipaTreinador";
-            this.labelEquipaTreinador.Size = new System.Drawing.Size(70, 13);
+            this.labelEquipaTreinador.Size = new System.Drawing.Size(43, 13);
             this.labelEquipaTreinador.TabIndex = 20;
-            this.labelEquipaTreinador.Text = "Tem Equipa?";
+            this.labelEquipaTreinador.Text = "Equipa:";
             // 
             // labelNomeTreinador
             // 
             this.labelNomeTreinador.AutoSize = true;
-            this.labelNomeTreinador.Location = new System.Drawing.Point(36, 73);
+            this.labelNomeTreinador.Location = new System.Drawing.Point(32, 29);
             this.labelNomeTreinador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNomeTreinador.Name = "labelNomeTreinador";
             this.labelNomeTreinador.Size = new System.Drawing.Size(38, 13);
@@ -92,8 +96,8 @@
             // 
             // textBoxIdade
             // 
-            this.textBoxIdade.Location = new System.Drawing.Point(77, 164);
-            this.textBoxIdade.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxIdade.Location = new System.Drawing.Point(73, 67);
+            this.textBoxIdade.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxIdade.Multiline = true;
             this.textBoxIdade.Name = "textBoxIdade";
             this.textBoxIdade.Size = new System.Drawing.Size(177, 34);
@@ -101,8 +105,8 @@
             // 
             // textBoxEquipa
             // 
-            this.textBoxEquipa.Location = new System.Drawing.Point(77, 249);
-            this.textBoxEquipa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxEquipa.Location = new System.Drawing.Point(73, 181);
+            this.textBoxEquipa.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxEquipa.Multiline = true;
             this.textBoxEquipa.Name = "textBoxEquipa";
             this.textBoxEquipa.Size = new System.Drawing.Size(177, 34);
@@ -110,18 +114,60 @@
             // 
             // textBoxNome
             // 
-            this.textBoxNome.Location = new System.Drawing.Point(77, 73);
-            this.textBoxNome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxNome.Location = new System.Drawing.Point(73, 29);
+            this.textBoxNome.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNome.Multiline = true;
             this.textBoxNome.Name = "textBoxNome";
             this.textBoxNome.Size = new System.Drawing.Size(177, 34);
             this.textBoxNome.TabIndex = 16;
             // 
+            // labelCategoria
+            // 
+            this.labelCategoria.AutoSize = true;
+            this.labelCategoria.Location = new System.Drawing.Point(14, 143);
+            this.labelCategoria.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCategoria.Name = "labelCategoria";
+            this.labelCategoria.Size = new System.Drawing.Size(55, 13);
+            this.labelCategoria.TabIndex = 27;
+            this.labelCategoria.Text = "Categoria:";
+            // 
+            // labelAltura
+            // 
+            this.labelAltura.AutoSize = true;
+            this.labelAltura.Location = new System.Drawing.Point(32, 105);
+            this.labelAltura.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelAltura.Name = "labelAltura";
+            this.labelAltura.Size = new System.Drawing.Size(37, 13);
+            this.labelAltura.TabIndex = 26;
+            this.labelAltura.Text = "Altura:";
+            // 
+            // textBoxCategoria
+            // 
+            this.textBoxCategoria.Location = new System.Drawing.Point(73, 143);
+            this.textBoxCategoria.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCategoria.Multiline = true;
+            this.textBoxCategoria.Name = "textBoxCategoria";
+            this.textBoxCategoria.Size = new System.Drawing.Size(177, 34);
+            this.textBoxCategoria.TabIndex = 25;
+            // 
+            // textBoxAltura
+            // 
+            this.textBoxAltura.Location = new System.Drawing.Point(73, 105);
+            this.textBoxAltura.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxAltura.Multiline = true;
+            this.textBoxAltura.Name = "textBoxAltura";
+            this.textBoxAltura.Size = new System.Drawing.Size(177, 34);
+            this.textBoxAltura.TabIndex = 24;
+            // 
             // FormEntidadeTreinadoresDetalhes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(298, 386);
+            this.ClientSize = new System.Drawing.Size(300, 275);
+            this.Controls.Add(this.labelCategoria);
+            this.Controls.Add(this.labelAltura);
+            this.Controls.Add(this.textBoxCategoria);
+            this.Controls.Add(this.textBoxAltura);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonAction);
             this.Controls.Add(this.labelIdadeTreinador);
@@ -130,7 +176,8 @@
             this.Controls.Add(this.textBoxIdade);
             this.Controls.Add(this.textBoxEquipa);
             this.Controls.Add(this.textBoxNome);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormEntidadeTreinadoresDetalhes";
             this.Text = "FormEntidadeTreinadoresDetalhes";
             this.Load += new System.EventHandler(this.FormEntidadeTreinadoresDetalhes_Load);
@@ -149,5 +196,9 @@
         private System.Windows.Forms.TextBox textBoxIdade;
         private System.Windows.Forms.TextBox textBoxEquipa;
         private System.Windows.Forms.TextBox textBoxNome;
+        private System.Windows.Forms.Label labelCategoria;
+        private System.Windows.Forms.Label labelAltura;
+        private System.Windows.Forms.TextBox textBoxCategoria;
+        private System.Windows.Forms.TextBox textBoxAltura;
     }
 }

@@ -34,22 +34,32 @@ namespace Cap09_Winforms_TrabalhoPratico
             {
                 case "Gravar":
                     textBoxNome.Text.Trim();
-                    textBoxAltura.Text.Trim();
                     textBoxIdade.Text.Trim();
+                    textBoxAltura.Text.Trim();
+                    // preparação da comboBox 
+                    // Carregamento da comboBox a partir da tabela
+                    List<Jogador> listaJogadores = SQL_Jogador.GetAll();     // Carrega a Lista com todos os registos da tabela
+                    comboBoxEquipa.DataSource = new BindingSource(listaJogadores, null);       // Associa a lista à ComboBox
+                    comboBoxEquipa.DisplayMember = "Nome";                       // Define qual o campo que surge na comboBox
+                    comboBoxEquipa.ValueMember = "Id";                               // Define qual o campo que é extraído.       
+                    comboBoxEquipa.SelectedIndex = -1;
                     break;
 
                 case "Alterar":
-                    textBoxNome.Text = Controlo.GetListaJogadores()[selectedIndex].getNome();
-                    textBoxAltura.Text = Controlo.GetListaJogadores()[selectedIndex].getIdade().ToString();
-                    textBoxIdade.Text = Controlo.GetListaJogadores()[selectedIndex].getAltura().ToString();
+                    textBoxNome.Text = Controlo.GetListaJogadores()[selectedIndex].nome;
+                    textBoxAltura.Text = Controlo.GetListaJogadores()[selectedIndex].idade.ToString();
+                    textBoxIdade.Text = Controlo.GetListaJogadores()[selectedIndex].altura.ToString();
+                    comboBoxEquipa.DataSource = new BindingSource(Controlo.GetListaJogadores()[selectedIndex].equipa, null);       // Associa a lista à ComboBox
+                    comboBoxEquipa.DisplayMember = "Nome";                       // Define qual o campo que surge na comboBox
+                    comboBoxEquipa.ValueMember = "Id";                           // Define qual o campo que é extraído.
                     break;
 
                 case "Apagar":
-                    textBoxNome.Text = Controlo.GetListaJogadores()[selectedIndex].getNome();
+                    textBoxNome.Text = Controlo.GetListaJogadores()[selectedIndex].nome;
                     textBoxNome.Enabled = false;
-                    textBoxAltura.Text = Controlo.GetListaJogadores()[selectedIndex].getIdade().ToString();
+                    textBoxAltura.Text = Controlo.GetListaJogadores()[selectedIndex].idade.ToString();
                     textBoxAltura.Enabled = false;
-                    textBoxIdade.Text = Controlo.GetListaJogadores()[selectedIndex].getAltura().ToString();
+                    textBoxIdade.Text = Controlo.GetListaJogadores()[selectedIndex].altura.ToString();
                     textBoxIdade.Enabled = false;                  
                     break;
             }
@@ -77,7 +87,7 @@ namespace Cap09_Winforms_TrabalhoPratico
 
                         if (idadeT == true && alturaT == true)
                         {
-                            Jogador Jogador = new Jogador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text));
+                            Jogador Jogador = new Jogador(0, textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text), textBoxPosicao.Text, SQL_Equipa(comboBoxEquipa.SelectedValue));
                             Controlo.GetListaJogadores().Add(Jogador);
                             this.Close();
                         }
@@ -105,7 +115,7 @@ namespace Cap09_Winforms_TrabalhoPratico
 
                         if (idadeT == true && alturaT == true)
                         {
-                            Jogador Jogador = new Jogador(textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text));
+                            Jogador Jogador = new Jogador(0, textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text), textBoxPosicao.Text);
                             Controlo.GetListaJogadores().Add(Jogador);
                             Controlo.GetListaJogadores().Remove(Controlo.GetListaJogadores()[selectedIndex]);
                             this.Close();

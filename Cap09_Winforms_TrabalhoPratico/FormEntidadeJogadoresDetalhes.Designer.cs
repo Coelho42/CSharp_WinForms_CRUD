@@ -36,12 +36,16 @@
             this.labelIdadeJogador = new System.Windows.Forms.Label();
             this.buttonAction = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.labelPosicao = new System.Windows.Forms.Label();
+            this.textBoxPosicao = new System.Windows.Forms.TextBox();
+            this.labelEquipa = new System.Windows.Forms.Label();
+            this.comboBoxEquipa = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBoxAltura
             // 
-            this.textBoxAltura.Location = new System.Drawing.Point(61, 232);
-            this.textBoxAltura.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxAltura.Location = new System.Drawing.Point(70, 99);
+            this.textBoxAltura.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxAltura.Multiline = true;
             this.textBoxAltura.Name = "textBoxAltura";
             this.textBoxAltura.Size = new System.Drawing.Size(177, 34);
@@ -49,8 +53,8 @@
             // 
             // textBoxIdade
             // 
-            this.textBoxIdade.Location = new System.Drawing.Point(61, 143);
-            this.textBoxIdade.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxIdade.Location = new System.Drawing.Point(70, 61);
+            this.textBoxIdade.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxIdade.Multiline = true;
             this.textBoxIdade.Name = "textBoxIdade";
             this.textBoxIdade.Size = new System.Drawing.Size(177, 34);
@@ -58,8 +62,8 @@
             // 
             // textBoxNome
             // 
-            this.textBoxNome.Location = new System.Drawing.Point(61, 54);
-            this.textBoxNome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxNome.Location = new System.Drawing.Point(70, 23);
+            this.textBoxNome.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNome.Multiline = true;
             this.textBoxNome.Name = "textBoxNome";
             this.textBoxNome.Size = new System.Drawing.Size(177, 34);
@@ -68,7 +72,7 @@
             // labelNomeJogador
             // 
             this.labelNomeJogador.AutoSize = true;
-            this.labelNomeJogador.Location = new System.Drawing.Point(20, 54);
+            this.labelNomeJogador.Location = new System.Drawing.Point(29, 23);
             this.labelNomeJogador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNomeJogador.Name = "labelNomeJogador";
             this.labelNomeJogador.Size = new System.Drawing.Size(38, 13);
@@ -78,7 +82,7 @@
             // labelAlturaJogador
             // 
             this.labelAlturaJogador.AutoSize = true;
-            this.labelAlturaJogador.Location = new System.Drawing.Point(20, 232);
+            this.labelAlturaJogador.Location = new System.Drawing.Point(29, 99);
             this.labelAlturaJogador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAlturaJogador.Name = "labelAlturaJogador";
             this.labelAlturaJogador.Size = new System.Drawing.Size(37, 13);
@@ -88,7 +92,7 @@
             // labelIdadeJogador
             // 
             this.labelIdadeJogador.AutoSize = true;
-            this.labelIdadeJogador.Location = new System.Drawing.Point(20, 143);
+            this.labelIdadeJogador.Location = new System.Drawing.Point(29, 61);
             this.labelIdadeJogador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelIdadeJogador.Name = "labelIdadeJogador";
             this.labelIdadeJogador.Size = new System.Drawing.Size(37, 13);
@@ -97,8 +101,8 @@
             // 
             // buttonAction
             // 
-            this.buttonAction.Location = new System.Drawing.Point(61, 305);
-            this.buttonAction.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAction.Location = new System.Drawing.Point(70, 202);
+            this.buttonAction.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAction.Name = "buttonAction";
             this.buttonAction.Size = new System.Drawing.Size(76, 37);
             this.buttonAction.TabIndex = 14;
@@ -108,8 +112,8 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(161, 305);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCancel.Location = new System.Drawing.Point(171, 202);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(76, 37);
             this.buttonCancel.TabIndex = 15;
@@ -117,11 +121,52 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // labelPosicao
+            // 
+            this.labelPosicao.AutoSize = true;
+            this.labelPosicao.Location = new System.Drawing.Point(18, 137);
+            this.labelPosicao.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelPosicao.Name = "labelPosicao";
+            this.labelPosicao.Size = new System.Drawing.Size(48, 13);
+            this.labelPosicao.TabIndex = 17;
+            this.labelPosicao.Text = "Posição:";
+            // 
+            // textBoxPosicao
+            // 
+            this.textBoxPosicao.Location = new System.Drawing.Point(70, 137);
+            this.textBoxPosicao.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxPosicao.Multiline = true;
+            this.textBoxPosicao.Name = "textBoxPosicao";
+            this.textBoxPosicao.Size = new System.Drawing.Size(177, 34);
+            this.textBoxPosicao.TabIndex = 16;
+            // 
+            // labelEquipa
+            // 
+            this.labelEquipa.AutoSize = true;
+            this.labelEquipa.Location = new System.Drawing.Point(18, 179);
+            this.labelEquipa.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelEquipa.Name = "labelEquipa";
+            this.labelEquipa.Size = new System.Drawing.Size(43, 13);
+            this.labelEquipa.TabIndex = 19;
+            this.labelEquipa.Text = "Equipa:";
+            // 
+            // comboBoxEquipa
+            // 
+            this.comboBoxEquipa.FormattingEnabled = true;
+            this.comboBoxEquipa.Location = new System.Drawing.Point(70, 176);
+            this.comboBoxEquipa.Name = "comboBoxEquipa";
+            this.comboBoxEquipa.Size = new System.Drawing.Size(177, 21);
+            this.comboBoxEquipa.TabIndex = 20;
+            // 
             // FormEntidadeJogadoresDetalhes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 371);
+            this.ClientSize = new System.Drawing.Size(309, 255);
+            this.Controls.Add(this.comboBoxEquipa);
+            this.Controls.Add(this.labelEquipa);
+            this.Controls.Add(this.labelPosicao);
+            this.Controls.Add(this.textBoxPosicao);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonAction);
             this.Controls.Add(this.labelIdadeJogador);
@@ -130,7 +175,8 @@
             this.Controls.Add(this.textBoxAltura);
             this.Controls.Add(this.textBoxIdade);
             this.Controls.Add(this.textBoxNome);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormEntidadeJogadoresDetalhes";
             this.Text = "FormEntidadeJogadoresDetalhes";
             this.Load += new System.EventHandler(this.FormEntidadeJogadoresDetalhes_Load);
@@ -148,5 +194,9 @@
         private System.Windows.Forms.Label labelIdadeJogador;
         private System.Windows.Forms.Button buttonAction;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Label labelPosicao;
+        private System.Windows.Forms.TextBox textBoxPosicao;
+        private System.Windows.Forms.Label labelEquipa;
+        private System.Windows.Forms.ComboBox comboBoxEquipa;
     }
 }

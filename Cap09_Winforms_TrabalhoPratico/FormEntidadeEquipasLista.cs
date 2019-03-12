@@ -39,7 +39,7 @@ namespace Cap09_Winforms_TrabalhoPratico
             {                
                 string convocada;
 
-                if(Equipa.getConvocada() == true)
+                if(Equipa.convocada == true)
                 {
                     convocada = "Sim";
                 }
@@ -50,7 +50,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                 ListViewItem listEquipas = new ListViewItem(
                      new[]
                     {
-                         Equipa.getNome(), convocada, Equipa.getLiga()              
+                         Equipa.nome, convocada, Equipa.liga              
                     });
                 listViewEquipa.Items.Add(listEquipas);
             }

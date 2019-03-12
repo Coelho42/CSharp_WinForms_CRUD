@@ -43,7 +43,7 @@
             // 
             this.labelJogadores.AutoSize = true;
             this.labelJogadores.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelJogadores.Location = new System.Drawing.Point(30, 36);
+            this.labelJogadores.Location = new System.Drawing.Point(29, 19);
             this.labelJogadores.Name = "labelJogadores";
             this.labelJogadores.Size = new System.Drawing.Size(108, 29);
             this.labelJogadores.TabIndex = 22;
@@ -52,7 +52,7 @@
             // buttonAdd
             // 
             this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAdd.Location = new System.Drawing.Point(35, 323);
+            this.buttonAdd.Location = new System.Drawing.Point(34, 306);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(98, 53);
             this.buttonAdd.TabIndex = 20;
@@ -63,7 +63,7 @@
             // buttonClose
             // 
             this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonClose.Location = new System.Drawing.Point(381, 323);
+            this.buttonClose.Location = new System.Drawing.Point(380, 306);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(98, 53);
             this.buttonClose.TabIndex = 19;
@@ -74,7 +74,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelete.Location = new System.Drawing.Point(267, 323);
+            this.buttonDelete.Location = new System.Drawing.Point(266, 306);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(98, 53);
             this.buttonDelete.TabIndex = 18;
@@ -85,7 +85,7 @@
             // buttonEdit
             // 
             this.buttonEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEdit.Location = new System.Drawing.Point(148, 323);
+            this.buttonEdit.Location = new System.Drawing.Point(147, 306);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(98, 53);
             this.buttonEdit.TabIndex = 17;
@@ -116,7 +116,7 @@
             this.columnHeader3});
             this.listViewEquipa.FullRowSelect = true;
             this.listViewEquipa.GridLines = true;
-            this.listViewEquipa.Location = new System.Drawing.Point(35, 68);
+            this.listViewEquipa.Location = new System.Drawing.Point(34, 51);
             this.listViewEquipa.MultiSelect = false;
             this.listViewEquipa.Name = "listViewEquipa";
             this.listViewEquipa.Size = new System.Drawing.Size(444, 249);
@@ -130,13 +130,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(531, 418);
+            this.ClientSize = new System.Drawing.Size(520, 381);
             this.Controls.Add(this.labelJogadores);
             this.Controls.Add(this.listViewEquipa);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormEntidadeEquipasLista";
             this.Text = "Equipas";
             this.Load += new System.EventHandler(this.FormEntidadeEquipasLista_Load);

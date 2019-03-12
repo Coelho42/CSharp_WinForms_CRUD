@@ -47,8 +47,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.15\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,7 +79,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Equipa.cs" />
+    <Compile Include="Entidades\Equipa.cs" />
     <Compile Include="FormEntidadeEquipasDetalhes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,7 +110,7 @@
     <Compile Include="FormEntidadeTreinadoresDetalhes.Designer.cs">
       <DependentUpon>FormEntidadeTreinadoresDetalhes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Jogador.cs" />
+    <Compile Include="Entidades\Jogador.cs" />
     <Compile Include="FormEntidadeJogadoresLista.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,8 +119,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SerializarDesserializar.cs" />
-    <Compile Include="Treinador.cs" />
+    <Compile Include="Serialização\SerializarDesserializar.cs" />
+    <Compile Include="SQL\SQL_Connection.cs" />
+    <Compile Include="SQL\SQL_Treinador.cs" />
+    <Compile Include="SQL\SQL_Equipa.cs" />
+    <Compile Include="SQL\SQL_Jogador.cs" />
+    <Compile Include="Entidades\Treinador.cs" />
     <Compile Include="FormEntidadeTreinadoresLista.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +165,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -182,5 +200,6 @@
   <ItemGroup>
     <None Include="Resources\Wallpapper.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

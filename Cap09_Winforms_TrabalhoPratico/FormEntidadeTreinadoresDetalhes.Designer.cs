@@ -34,17 +34,17 @@
             this.labelEquipaTreinador = new System.Windows.Forms.Label();
             this.labelNomeTreinador = new System.Windows.Forms.Label();
             this.textBoxIdade = new System.Windows.Forms.TextBox();
-            this.textBoxEquipa = new System.Windows.Forms.TextBox();
             this.textBoxNome = new System.Windows.Forms.TextBox();
             this.labelCategoria = new System.Windows.Forms.Label();
             this.labelAltura = new System.Windows.Forms.Label();
             this.textBoxCategoria = new System.Windows.Forms.TextBox();
             this.textBoxAltura = new System.Windows.Forms.TextBox();
+            this.comboBoxEquipa = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(174, 219);
+            this.buttonCancel.Location = new System.Drawing.Point(174, 208);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(76, 37);
@@ -55,7 +55,7 @@
             // 
             // buttonAction
             // 
-            this.buttonAction.Location = new System.Drawing.Point(73, 219);
+            this.buttonAction.Location = new System.Drawing.Point(73, 208);
             this.buttonAction.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAction.Name = "buttonAction";
             this.buttonAction.Size = new System.Drawing.Size(76, 37);
@@ -77,7 +77,7 @@
             // labelEquipaTreinador
             // 
             this.labelEquipaTreinador.AutoSize = true;
-            this.labelEquipaTreinador.Location = new System.Drawing.Point(26, 181);
+            this.labelEquipaTreinador.Location = new System.Drawing.Point(26, 182);
             this.labelEquipaTreinador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelEquipaTreinador.Name = "labelEquipaTreinador";
             this.labelEquipaTreinador.Size = new System.Drawing.Size(43, 13);
@@ -102,15 +102,6 @@
             this.textBoxIdade.Name = "textBoxIdade";
             this.textBoxIdade.Size = new System.Drawing.Size(177, 34);
             this.textBoxIdade.TabIndex = 18;
-            // 
-            // textBoxEquipa
-            // 
-            this.textBoxEquipa.Location = new System.Drawing.Point(73, 181);
-            this.textBoxEquipa.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxEquipa.Multiline = true;
-            this.textBoxEquipa.Name = "textBoxEquipa";
-            this.textBoxEquipa.Size = new System.Drawing.Size(177, 34);
-            this.textBoxEquipa.TabIndex = 17;
             // 
             // textBoxNome
             // 
@@ -159,11 +150,20 @@
             this.textBoxAltura.Size = new System.Drawing.Size(177, 34);
             this.textBoxAltura.TabIndex = 24;
             // 
+            // comboBoxEquipa
+            // 
+            this.comboBoxEquipa.FormattingEnabled = true;
+            this.comboBoxEquipa.Location = new System.Drawing.Point(73, 182);
+            this.comboBoxEquipa.Name = "comboBoxEquipa";
+            this.comboBoxEquipa.Size = new System.Drawing.Size(177, 21);
+            this.comboBoxEquipa.TabIndex = 28;
+            // 
             // FormEntidadeTreinadoresDetalhes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 275);
+            this.ClientSize = new System.Drawing.Size(300, 259);
+            this.Controls.Add(this.comboBoxEquipa);
             this.Controls.Add(this.labelCategoria);
             this.Controls.Add(this.labelAltura);
             this.Controls.Add(this.textBoxCategoria);
@@ -174,7 +174,6 @@
             this.Controls.Add(this.labelEquipaTreinador);
             this.Controls.Add(this.labelNomeTreinador);
             this.Controls.Add(this.textBoxIdade);
-            this.Controls.Add(this.textBoxEquipa);
             this.Controls.Add(this.textBoxNome);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -194,11 +193,11 @@
         private System.Windows.Forms.Label labelEquipaTreinador;
         private System.Windows.Forms.Label labelNomeTreinador;
         private System.Windows.Forms.TextBox textBoxIdade;
-        private System.Windows.Forms.TextBox textBoxEquipa;
         private System.Windows.Forms.TextBox textBoxNome;
         private System.Windows.Forms.Label labelCategoria;
         private System.Windows.Forms.Label labelAltura;
         private System.Windows.Forms.TextBox textBoxCategoria;
         private System.Windows.Forms.TextBox textBoxAltura;
+        private System.Windows.Forms.ComboBox comboBoxEquipa;
     }
 }

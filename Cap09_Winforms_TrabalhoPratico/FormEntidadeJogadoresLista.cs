@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cap09_Winforms_TrabalhoPratico
@@ -37,12 +30,12 @@ namespace Cap09_Winforms_TrabalhoPratico
             listViewJogador.Items.Clear();
             foreach (Jogador Jogador in Controlo.GetListaJogadores())
             {                            
-                ListViewItem listJogadores = new ListViewItem(
+                ListViewItem listaJogadores = new ListViewItem(
                      new[]
                     {
-                         Jogador.nome, Jogador.idade.ToString(), Jogador.altura.ToString(), Jogador.posicao
+                         Jogador.nome, Jogador.idade.ToString(), Jogador.altura.ToString(), Jogador.posicao, Jogador.equipa.nome
                     });
-                listViewJogador.Items.Add(listJogadores);
+                listViewJogador.Items.Add(listaJogadores);
             }
         }
         #endregion

@@ -37,20 +37,10 @@ namespace Cap09_Winforms_TrabalhoPratico
             listViewTreinador.Items.Clear();
             foreach (Treinador treinador in Controlo.GetListaTreinadores())
             {
-                string convocada;
-
-                if (treinador.getEquipa() == true)
-                {
-                    convocada = "Sim";
-                }
-                else
-                {
-                    convocada = "Não";
-                }
                 ListViewItem listTreinadores = new ListViewItem(
                      new[]
                     {
-                         treinador.getNome(), convocada, treinador.getIdade().ToString()
+                         treinador.nome, treinador.idade.ToString(), treinador.altura.ToString(), treinador.categoria, treinador.equipa.nome
                     });
                 listViewTreinador.Items.Add(listTreinadores);
             }

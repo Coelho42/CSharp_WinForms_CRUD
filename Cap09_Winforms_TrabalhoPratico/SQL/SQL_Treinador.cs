@@ -110,6 +110,11 @@ namespace Cap09_Winforms_TrabalhoPratico
                         }
                     }
                 }
+                // Se Entidade tem FKs, Executar um foreach à lista de objetos extraídos e completar com o objeto fk, usando um get(id) à SQL respetiva
+                foreach (Treinador treinador in listaTreinadores)
+                {
+                    treinador.equipa = SQL_Equipa.Get(treinador.equipa.id);
+                }
             }
             catch (Exception e)
             {
@@ -168,7 +173,8 @@ namespace Cap09_Winforms_TrabalhoPratico
                             }
                         }
                     }
-                }
+                }               
+                treinador.equipa = SQL_Equipa.Get(treinador.equipa.id);
             }
             catch (Exception e)
             {

@@ -30,16 +30,19 @@ namespace Cap09_Winforms_TrabalhoPratico
         #region Getters & Setters
         public static List<Equipa> GetListaEquipas()
         {
+            listaEquipas = SQL_Equipa.GetAll();
             return listaEquipas;
         }
 
         public static List<Jogador> GetListaJogadores()
         {
+            listaJogadores = SQL_Jogador.GetAll();
             return listaJogadores;
         }
 
         public static List<Treinador> GetListaTreinadores()
         {
+            listaTreinadores = SQL_Treinador.GetAll();
             return listaTreinadores;
         }
         #endregion

@@ -48,7 +48,7 @@ namespace Cap09_Winforms_TrabalhoPratico
             }
             catch (Exception e)
             {
-                MessageBox.Show("Erro...");
+                MessageBox.Show(e.ToString());
             }
         }
         #endregion
@@ -198,8 +198,8 @@ namespace Cap09_Winforms_TrabalhoPratico
                         + " WHERE Id = @Id;";
                         sqlCommand.Parameters.Add(new MySqlParameter("@Id", equipa.id));
                         sqlCommand.Parameters.Add(new MySqlParameter("@nome", equipa.nome));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@idade", equipa.convocada));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@altura", equipa.liga));
+                        sqlCommand.Parameters.Add(new MySqlParameter("@convocada", equipa.convocada));
+                        sqlCommand.Parameters.Add(new MySqlParameter("@liga", equipa.liga));
 
                         // Tenta executar o comando, que é suposto devolver 1
                         if (sqlCommand.ExecuteNonQuery() != 1)
@@ -212,7 +212,7 @@ namespace Cap09_Winforms_TrabalhoPratico
             }
             catch (Exception e)
             {
-                MessageBox.Show("Erro...");
+                MessageBox.Show(e.ToString());
             }
         }
 

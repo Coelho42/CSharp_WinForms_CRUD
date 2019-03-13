@@ -37,6 +37,8 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // labelTreinadores
@@ -54,7 +56,9 @@
             this.listViewTreinador.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
             this.listViewTreinador.FullRowSelect = true;
             this.listViewTreinador.GridLines = true;
             this.listViewTreinador.Location = new System.Drawing.Point(21, 44);
@@ -78,8 +82,8 @@
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Tem Equipa?";
-            this.columnHeader3.Width = 99;
+            this.columnHeader3.Text = "Altura:";
+            this.columnHeader3.Width = 69;
             // 
             // buttonAdd
             // 
@@ -125,6 +129,16 @@
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Categoria:";
+            this.columnHeader4.Width = 83;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Equipa:";
+            this.columnHeader5.Width = 82;
+            // 
             // FormEntidadeTreinadoresLista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,5 +170,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }

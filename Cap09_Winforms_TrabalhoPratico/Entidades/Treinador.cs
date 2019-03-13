@@ -34,7 +34,6 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// </summary>
         public double altura { get; internal set; }
 
-
         /// <summary>
         /// É uma variável do tipo double que recebe a altura dos treinadores, pois as alturas têm no máximo 3 digitos mas tem números décimais, logo tem de ser um long.
         /// </summary>

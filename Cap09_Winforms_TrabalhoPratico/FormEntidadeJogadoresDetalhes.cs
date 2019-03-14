@@ -122,8 +122,11 @@ namespace Cap09_Winforms_TrabalhoPratico
 
                         if (idadeT == true && alturaT == true)
                         {
-                            Jogador Jogador = new Jogador(0, textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text), textBoxPosicao.Text, SQL_Equipa.Get(Convert.ToInt64(comboBoxEquipa.SelectedValue)));
-                            SQL_Jogador.Set(Jogador);
+                            Jogador Jogador = Controlo.GetListaJogadores()[selectedIndex];      // Cria um novo objeto Jogador
+                            Jogador.nome = textBoxNome.Text;      // Atribuí o nome ao Jogador
+                            Jogador.idade = Convert.ToInt32(textBoxIdade.Text);        // Atribuí a idade ao Jogador
+                            Jogador.altura = Convert.ToDouble(textBoxAltura.Text);      // Atribuí a altura ao Jogador
+                            Jogador.posicao = textBoxPosicao.Text;      // Atribuí a posição ao Jogador
                             Controlo.GetListaJogadores().Remove(Controlo.GetListaJogadores()[selectedIndex]);
                             Controlo.GetListaJogadores().Add(Jogador);
 

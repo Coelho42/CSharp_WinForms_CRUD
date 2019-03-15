@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Text;
 using System.Windows.Forms;
 using static Cap09_Winforms_TrabalhoPratico.SQL_Connection;
 
@@ -256,7 +257,6 @@ namespace Cap09_Winforms_TrabalhoPratico
             }
         }
 
-        /*
         /// <summary>
         /// Controlo de Violação de Integridade Relacional. 
         /// Aplica-se antes do del(). 
@@ -283,46 +283,29 @@ namespace Cap09_Winforms_TrabalhoPratico
             // Para cada tabela referenciada acima, puxa a lista e verifica se tem o registo a eliminar.
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            // verifica se há FKs em Jogo
+            // verifica se há FKs em Jogador
             count = 0;
-            foreach (Jogo jogo in SQL_Jogo.GetAll())
+            foreach (Jogador jogador in SQL_Jogador.GetAll())
             {
-                if (jogo.Utilizador1.Id == equipa.Id)
-                {
-                    count++;
-                    relationalViolationForFKtables = true;
-                }
-                else if(jogo.Utilizador2.Id == equipa.Id)
+                if (jogador.equipa.id == equipa.id)
                 {
                     count++;
                     relationalViolationForFKtables = true;
                 }
             }
-            if (count > 0) strBuilderFK.AppendLine("- Jogo (" + count + "); ");
+            if (count > 0) strBuilderFK.AppendLine("- Jogador (" + count + "); ");
 
-            // verifica se há FKs em Inventario
+            // verifica se há FKs em Treinador
             count = 0;
-            foreach (Inventario inventario in SQL_Inventario.GetAll())
+            foreach (Treinador treinador in SQL_Treinador.GetAll())
             {
-                if (inventario.Equipa.Id == equipa.Id)
+                if (treinador.equipa.id == equipa.id)
                 {
                     count++;
                     relationalViolationForFKtables = true;
                 }
             }
-            if (count > 0) strBuilderFK.AppendLine("- Inventário (" + count + "); ");
-
-            // verifica se há FKs em Deck
-            count = 0;
-            foreach (Deck deck in SQL_Deck.GetAll())
-            {
-                if (deck.Equipa.Id == equipa.Id)
-                {
-                    count++;
-                    relationalViolationForFKtables = true;
-                }
-            }
-            if (count > 0) strBuilderFK.AppendLine("- Deck (" + count + "); ");
+            if (count > 0) strBuilderFK.AppendLine("- Treinador (" + count + "); ");
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // Comunicação ao equipa.
@@ -340,8 +323,6 @@ namespace Cap09_Winforms_TrabalhoPratico
             }
             return false;       // Não há violação de integridade
         }
-
-    */
         #endregion
     }
 }

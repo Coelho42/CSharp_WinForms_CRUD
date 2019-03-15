@@ -33,12 +33,13 @@ namespace Cap09_Winforms_TrabalhoPratico
                     {
                         sqlCommand.CommandType = CommandType.Text;
                         sqlCommand.CommandText = "INSERT INTO Treinador"
-                        + "(Nome, Idade, Altura, Categoria)"
-                        + "VALUES(@nome,@idade,@altura,@categoria);";
+                        + "(Nome, Idade, Altura, Categoria, EquipaID)"
+                        + "VALUES(@nome,@idade,@altura,@categoria,@equipaid);";
                         sqlCommand.Parameters.Add(new MySqlParameter("@nome", treinador.nome));
                         sqlCommand.Parameters.Add(new MySqlParameter("@idade", treinador.idade));
                         sqlCommand.Parameters.Add(new MySqlParameter("@altura", treinador.altura));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@posicao", treinador.categoria));
+                        sqlCommand.Parameters.Add(new MySqlParameter("@categoria", treinador.categoria));
+                        sqlCommand.Parameters.Add(new MySqlParameter("@equipaid", treinador.equipa.id));
 
                         // Tenta Executar e Se diferente de 1, provoca excessão saltanto para o catch
                         if (sqlCommand.ExecuteNonQuery() != 1)
@@ -50,7 +51,7 @@ namespace Cap09_Winforms_TrabalhoPratico
             }
             catch (Exception e)
             {
-                MessageBox.Show("Erro...");
+                MessageBox.Show(e.ToString());
             }
         }
         #endregion
@@ -207,13 +208,15 @@ namespace Cap09_Winforms_TrabalhoPratico
                         + " Nome = @nome,"
                         + " Idade = @idade,"
                         + " Altura = @altura,"
-                        + " Categoria = @categoria"
+                        + " Categoria = @categoria,"
+                        + " EquipaID = @equipaid"
                         + " WHERE Id = @Id;";
                         sqlCommand.Parameters.Add(new MySqlParameter("@Id", treinador.id));
                         sqlCommand.Parameters.Add(new MySqlParameter("@nome", treinador.nome));
                         sqlCommand.Parameters.Add(new MySqlParameter("@idade", treinador.idade));
                         sqlCommand.Parameters.Add(new MySqlParameter("@altura", treinador.altura));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@posicao", treinador.categoria));
+                        sqlCommand.Parameters.Add(new MySqlParameter("@categoria", treinador.categoria));
+                        sqlCommand.Parameters.Add(new MySqlParameter("@equipaid", treinador.equipa.id));
 
                         // Tenta executar o comando, que é suposto devolver 1
                         if (sqlCommand.ExecuteNonQuery() != 1)
@@ -226,7 +229,7 @@ namespace Cap09_Winforms_TrabalhoPratico
             }
             catch (Exception e)
             {
-                MessageBox.Show("Erro...");
+                MessageBox.Show(e.ToString());
             }
         }
 
@@ -269,93 +272,6 @@ namespace Cap09_Winforms_TrabalhoPratico
                 MessageBox.Show("Erro...");
             }
         }
-
-        /*
-        /// <summary>
-        /// Controlo de Violação de Integridade Relacional. 
-        /// Aplica-se antes do del(). 
-        /// A não utilização em PAR destes métodos, vai gerar Exceções
-        /// </summary>
-        /// <param name="aluno">Registo a testar</param>
-        /// <returns></returns>
-        static internal bool CheckRelationalIntegrityViolation(Treinador treinador)
-        {
-            ////////////////////////////////////////////////////////////////////////////////////////////////
-            // Controlo de Violação de Inegridade Relacional:
-            // Verifica se o registo em delete, existe nas tabelas relacionadas (com FK para esta tabela)
-            // Analisar no DER as tabelas a tratar: Turma
-            ////////////////////////////////////////////////////////////////////////////////////////////////
-            StringBuilder strBuilderFK = new StringBuilder();    // Recebe a info onde há violação de integridade
-            strBuilderFK.AppendLine("Para eliminar este registo, precisa primeiro de eliminar os seus movimentos em:");
-
-            // Flag de controlo de violação de interidade, para ativar as mensagens na FormAuxuliarInfo
-            bool relationalViolationForFKtables = false;   // ativa-se quando o user é fk em tabelas relacionadas
-
-            int count;  // Acumula o nº de ocorrências positivas:
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // Para cada tabela referenciada acima, puxa a lista e verifica se tem o registo a eliminar.
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            // verifica se há FKs em Jogo
-            count = 0;
-            foreach (Jogo jogo in SQL_Jogo.GetAll())
-            {
-                if (jogo.Utilizador1.Id == treinador.Id)
-                {
-                    count++;
-                    relationalViolationForFKtables = true;
-                }
-                else if(jogo.Utilizador2.Id == treinador.Id)
-                {
-                    count++;
-                    relationalViolationForFKtables = true;
-                }
-            }
-            if (count > 0) strBuilderFK.AppendLine("- Jogo (" + count + "); ");
-
-            // verifica se há FKs em Inventario
-            count = 0;
-            foreach (Inventario inventario in SQL_Inventario.GetAll())
-            {
-                if (inventario.Treinador.Id == treinador.Id)
-                {
-                    count++;
-                    relationalViolationForFKtables = true;
-                }
-            }
-            if (count > 0) strBuilderFK.AppendLine("- Inventário (" + count + "); ");
-
-            // verifica se há FKs em Deck
-            count = 0;
-            foreach (Deck deck in SQL_Deck.GetAll())
-            {
-                if (deck.Treinador.Id == treinador.Id)
-                {
-                    count++;
-                    relationalViolationForFKtables = true;
-                }
-            }
-            if (count > 0) strBuilderFK.AppendLine("- Deck (" + count + "); ");
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // Comunicação ao treinador.
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // Se Flag ativa, há violação de integridade relacional. Informa e devolve true.
-            if (relationalViolationForFKtables)
-            {
-                MessageBox.Show(
-                    strBuilderFK.ToString(),    // Corpo da msg
-                    "Violação de Integridade Relacional",         // Título
-                    MessageBoxButtons.OK,       // Botões
-                    MessageBoxIcon.Information  // Icon
-                );
-                return true;    // Há violação de integridade
-            }
-            return false;       // Não há violação de integridade
-        }
-
-    */
         #endregion
     }
 }

@@ -170,7 +170,11 @@ namespace Cap09_Winforms_TrabalhoPratico
 
                 // Caso o conteúdo seja "Apagar" faz...
                 case "Apagar":
-                    SQL_Equipa.Del(Controlo.GetListaEquipas()[selectedIndex]);      // Apaga a Equipa da base de dados
+                    if (!SQL_Equipa.CheckRelationalIntegrityViolation(Controlo.GetListaEquipas()[selectedIndex]))
+                    {
+                        SQL_Equipa.Del(Controlo.GetListaEquipas()[selectedIndex]);      // Apaga a Equipa da base de dados
+                    }
+                   
                     this.Close();       // Fecha a interface
                     break;
             }

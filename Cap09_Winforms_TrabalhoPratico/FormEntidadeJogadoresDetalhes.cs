@@ -15,6 +15,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         #region Variáveis
         string strAction;
         int selectedIndex;
+        List<Equipa> listaEquipas;
         #endregion
 
         #region Initialize
@@ -24,6 +25,7 @@ namespace Cap09_Winforms_TrabalhoPratico
             this.strAction = strAction;
             this.selectedIndex = selectedIndex;
             buttonAction.Text = strAction;
+            listaEquipas = SQL_Equipa.GetAll();     // Carrega a Lista com todos os registos da tabela
         }
         #endregion
 
@@ -38,8 +40,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                     textBoxAltura.Text.Trim();
                     textBoxPosicao.Text.Trim();
                     // preparação da comboBox 
-                    // Carregamento da comboBox a partir da tabela
-                    List<Equipa> listaEquipas = SQL_Equipa.GetAll();     // Carrega a Lista com todos os registos da tabela
+                    // Carregamento da comboBox a partir da tabela   
                     comboBoxEquipa.DataSource = new BindingSource(listaEquipas, null);       // Associa a lista à ComboBox
                     comboBoxEquipa.DisplayMember = "Nome";                       // Define qual o campo que surge na comboBox
                     comboBoxEquipa.ValueMember = "Id";                               // Define qual o campo que é extraído.       
@@ -51,7 +52,8 @@ namespace Cap09_Winforms_TrabalhoPratico
                     textBoxIdade.Text = Controlo.GetListaJogadores()[selectedIndex].idade.ToString();
                     textBoxAltura.Text = Controlo.GetListaJogadores()[selectedIndex].altura.ToString();
                     textBoxPosicao.Text = Controlo.GetListaJogadores()[selectedIndex].posicao;
-                    comboBoxEquipa.DataSource = new BindingSource(Controlo.GetListaJogadores()[selectedIndex].equipa, null);       // Associa a lista à ComboBox
+                    comboBoxEquipa.DataSource = new BindingSource(listaEquipas, null); ;       // Associa a lista à ComboBox
+                    comboBoxEquipa.SelectedText = Controlo.GetListaJogadores()[selectedIndex].equipa.ToString();
                     comboBoxEquipa.DisplayMember = "Nome";                       // Define qual o campo que surge na comboBox
                     comboBoxEquipa.ValueMember = "Id";                           // Define qual o campo que é extraído.
                     break;
@@ -64,9 +66,12 @@ namespace Cap09_Winforms_TrabalhoPratico
                     textBoxAltura.Text = Controlo.GetListaJogadores()[selectedIndex].altura.ToString();
                     textBoxAltura.Enabled = false;
                     textBoxPosicao.Text = Controlo.GetListaJogadores()[selectedIndex].posicao;
-                    comboBoxEquipa.DataSource = new BindingSource(Controlo.GetListaJogadores()[selectedIndex].equipa, null);       // Associa a lista à ComboBox
+                    textBoxPosicao.Enabled = false;
+                    comboBoxEquipa.DataSource = new BindingSource(listaEquipas, null); ;       // Associa a lista à ComboBox
+                    comboBoxEquipa.SelectedText = Controlo.GetListaJogadores()[selectedIndex].equipa.ToString();
                     comboBoxEquipa.DisplayMember = "Nome";                       // Define qual o campo que surge na comboBox
                     comboBoxEquipa.ValueMember = "Id";                           // Define qual o campo que é extraído.
+                    comboBoxEquipa.Enabled = false;
                     break;
             }
         }
@@ -127,6 +132,8 @@ namespace Cap09_Winforms_TrabalhoPratico
                             Jogador.idade = Convert.ToInt32(textBoxIdade.Text);        // Atribuí a idade ao Jogador
                             Jogador.altura = Convert.ToDouble(textBoxAltura.Text);      // Atribuí a altura ao Jogador
                             Jogador.posicao = textBoxPosicao.Text;      // Atribuí a posição ao Jogador
+                            Jogador.equipa = SQL_Equipa.Get(Convert.ToInt64(comboBoxEquipa.SelectedValue));     // Atribuí a equipa ao Jogador
+                            SQL_Jogador.Set(Jogador);
                             Controlo.GetListaJogadores().Remove(Controlo.GetListaJogadores()[selectedIndex]);
                             Controlo.GetListaJogadores().Add(Jogador);
 
@@ -141,7 +148,6 @@ namespace Cap09_Winforms_TrabalhoPratico
 
                 case "Apagar":
                     SQL_Jogador.Del(Controlo.GetListaJogadores()[selectedIndex]);
-                    Controlo.GetListaJogadores().Remove(Controlo.GetListaJogadores()[selectedIndex]);
                     this.Close();
                     break;
             }

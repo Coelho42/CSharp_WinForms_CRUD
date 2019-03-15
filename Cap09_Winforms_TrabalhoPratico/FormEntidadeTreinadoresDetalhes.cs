@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cap09_Winforms_TrabalhoPratico
@@ -16,6 +10,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         string strAction;
         int selectedIndex;
         bool convocada = false;
+        List<Equipa> listaEquipas;     // Carrega a Lista com todos os registos da tabela
         #endregion
 
         #region Initialize
@@ -25,6 +20,7 @@ namespace Cap09_Winforms_TrabalhoPratico
             this.strAction = strAction;
             this.selectedIndex = selectedIndex;
             buttonAction.Text = strAction;
+            listaEquipas = SQL_Equipa.GetAll();     // Carrega a Lista com todos os registos da tabela
         }
         #endregion
 
@@ -39,8 +35,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                     textBoxAltura.Text.Trim();
                     textBoxCategoria.Text.Trim();
                     // preparação da comboBox 
-                    // Carregamento da comboBox a partir da tabela
-                    List<Equipa> listaEquipas = SQL_Equipa.GetAll();     // Carrega a Lista com todos os registos da tabela
+                    // Carregamento da comboBox a partir da tabela                   
                     comboBoxEquipa.DataSource = new BindingSource(listaEquipas, null);       // Associa a lista à ComboBox
                     comboBoxEquipa.DisplayMember = "Nome";                       // Define qual o campo que surge na comboBox
                     comboBoxEquipa.ValueMember = "Id";                               // Define qual o campo que é extraído.       
@@ -52,7 +47,8 @@ namespace Cap09_Winforms_TrabalhoPratico
                     textBoxIdade.Text = Controlo.GetListaTreinadores()[selectedIndex].idade.ToString();
                     textBoxAltura.Text = Controlo.GetListaTreinadores()[selectedIndex].altura.ToString();
                     textBoxCategoria.Text = Controlo.GetListaTreinadores()[selectedIndex].categoria;
-                    comboBoxEquipa.DataSource = new BindingSource(Controlo.GetListaJogadores()[selectedIndex].equipa, null);       // Associa a lista à ComboBox
+                    comboBoxEquipa.DataSource = new BindingSource(Controlo.GetListaTreinadores()[selectedIndex].equipa, null);       // Associa a lista à ComboBox
+                    comboBoxEquipa.SelectedText = Controlo.GetListaTreinadores()[selectedIndex].equipa.ToString();
                     comboBoxEquipa.DisplayMember = "Nome";                       // Define qual o campo que surge na comboBox
                     comboBoxEquipa.ValueMember = "Id";                           // Define qual o campo que é extraído.
                     break;
@@ -66,9 +62,10 @@ namespace Cap09_Winforms_TrabalhoPratico
                     textBoxAltura.Enabled = false;
                     textBoxCategoria.Text = Controlo.GetListaTreinadores()[selectedIndex].categoria;
                     textBoxCategoria.Enabled = false;
-                    comboBoxEquipa.DataSource = new BindingSource(Controlo.GetListaJogadores()[selectedIndex].equipa, null);       // Associa a lista à ComboBox
+                    comboBoxEquipa.DataSource = new BindingSource(Controlo.GetListaTreinadores()[selectedIndex].equipa, null);       // Associa a lista à ComboBox
                     comboBoxEquipa.DisplayMember = "Nome";                       // Define qual o campo que surge na comboBox
                     comboBoxEquipa.ValueMember = "Id";                           // Define qual o campo que é extraído.
+                    comboBoxEquipa.Enabled = false;
 
                     break;
             }
@@ -95,6 +92,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                         if (idadeT == true)
                         {
                             Treinador treinador = new Treinador(0, textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text), textBoxCategoria.Text, SQL_Equipa.Get(Convert.ToInt64(comboBoxEquipa.SelectedValue)));
+                            SQL_Treinador.Add(treinador);
                             Controlo.GetListaTreinadores().Add(treinador);
                             this.Close();
                         }
@@ -120,7 +118,13 @@ namespace Cap09_Winforms_TrabalhoPratico
                            
                         if (idadeT == true)
                         {
-                            Treinador treinador = new Treinador(0, textBoxNome.Text, Convert.ToInt32(textBoxIdade.Text), Convert.ToDouble(textBoxAltura.Text), textBoxCategoria.Text, SQL_Equipa.Get(Convert.ToInt64(comboBoxEquipa.SelectedValue)));
+                            Treinador treinador = Controlo.GetListaTreinadores()[selectedIndex];      // Cria um novo objeto Treinador
+                            treinador.nome = textBoxNome.Text;      // Atribuí o nome ao Treinador
+                            treinador.idade = Convert.ToInt32(textBoxIdade.Text);        // Atribuí a idade ao Treinador
+                            treinador.altura = Convert.ToDouble(textBoxAltura.Text);      // Atribuí a altura ao Treinador
+                            treinador.categoria = textBoxCategoria.Text;      // Atribuí a categoria ao Treinador
+                            treinador.equipa = SQL_Equipa.Get(Convert.ToInt64(comboBoxEquipa.SelectedValue));     // Atribuí a equipa ao Treinador
+                            SQL_Treinador.Set(treinador);
                             Controlo.GetListaTreinadores().Add(treinador);
                             Controlo.GetListaTreinadores().Remove(Controlo.GetListaTreinadores()[selectedIndex]);
                             this.Close();
@@ -133,7 +137,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                     break;
 
                 case "Apagar":
-                    Controlo.GetListaTreinadores().Remove(Controlo.GetListaTreinadores()[selectedIndex]);
+                    SQL_Treinador.Del(Controlo.GetListaTreinadores()[selectedIndex]);
                     this.Close();
                     break;
             }

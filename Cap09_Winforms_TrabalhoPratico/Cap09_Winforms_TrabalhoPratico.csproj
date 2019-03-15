@@ -117,6 +117,14 @@
     <Compile Include="FormEntidadeJogadoresLista.Designer.cs">
       <DependentUpon>FormEntidadeJogadoresLista.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sockets\FormWork.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sockets\FormWork.designer.cs">
+      <DependentUpon>FormWork.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sockets\NetWorkingCliente.cs" />
+    <Compile Include="Sockets\NetWorkingServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialização\SerializarDesserializar.cs" />
@@ -131,6 +139,7 @@
     <Compile Include="FormEntidadeTreinadoresLista.Designer.cs">
       <DependentUpon>FormEntidadeTreinadoresLista.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sockets\Tools.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
@@ -154,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEntidadeTreinadoresLista.resx">
       <DependentUpon>FormEntidadeTreinadoresLista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sockets\FormWork.resx">
+      <DependentUpon>FormWork.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

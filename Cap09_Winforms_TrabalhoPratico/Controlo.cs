@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cap09_Winforms_TrabalhoPratico.Sockets;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -158,5 +159,29 @@ namespace Cap09_Winforms_TrabalhoPratico
             }
         }
         #endregion
+
+        /// <summary>
+        /// Abre a interface para os Sockets do Servidor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void serverToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Tools.IsServer = true;
+            FormWork formSockets = new FormWork();
+            formSockets.ShowDialog();
+        }
+
+        /// <summary>
+        /// Abre a interface para os Sockets do Cliente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Tools.IsServer = false;
+            FormWork formSockets = new FormWork();
+            formSockets.ShowDialog();
+        }
     }
 }

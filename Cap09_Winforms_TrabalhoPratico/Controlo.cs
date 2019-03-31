@@ -1,15 +1,11 @@
 ﻿using Cap09_Winforms_TrabalhoPratico.Sockets;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Cap09_Winforms_TrabalhoPratico.Settings;
+using static Cap09_Winforms_TrabalhoPratico.SQL_Connection;
 
 namespace Cap09_Winforms_TrabalhoPratico
 {
@@ -52,24 +48,6 @@ namespace Cap09_Winforms_TrabalhoPratico
         {
             About formAbout = new About();
             formAbout.ShowDialog();
-        }
-
-        private void equipasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormEntidadeEquipasLista formEquipa = new FormEntidadeEquipasLista();
-            formEquipa.ShowDialog();
-        }
-
-        private void jogadoresToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormEntidadeJogadoresLista formJogador = new FormEntidadeJogadoresLista();
-            formJogador.ShowDialog();
-        }
-
-        private void treinadoresToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormEntidadeTreinadoresLista formTreinador = new FormEntidadeTreinadoresLista();
-            formTreinador.ShowDialog();
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
@@ -183,5 +161,99 @@ namespace Cap09_Winforms_TrabalhoPratico
             FormWork formSockets = new FormWork();
             formSockets.ShowDialog();
         }
+
+        #region CRUDS
+
+        #region Equipa
+        private void bDLocalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeEquipasLista();
+            DBMSactive = DBMS_SQLSERVER_BD_LOCAL;
+            fr.ShowDialog();
+        }
+
+        private void mySQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeEquipasLista();
+            DBMSactive = DBMS_MYSQL;
+            fr.ShowDialog();
+        }
+
+        private void sQLServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeEquipasLista();
+            DBMSactive = DBMS_SQLSERVER;
+            fr.ShowDialog();
+        }
+
+        private void sQLiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeEquipasLista();
+            DBMSactive = DBMS_SQLITE;
+            fr.ShowDialog();
+        }
+        #endregion
+
+        #region Jogador
+        private void bDLocalToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeJogadoresLista();
+            DBMSactive = DBMS_SQLSERVER_BD_LOCAL;
+            fr.ShowDialog();
+        }
+
+        private void mySQLToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeJogadoresLista();
+            DBMSactive = DBMS_MYSQL;
+            fr.ShowDialog();
+        }
+
+        private void sQLServerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeJogadoresLista();
+            DBMSactive = DBMS_SQLSERVER;
+            fr.ShowDialog();
+        }
+
+        private void sQLiteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeJogadoresLista();
+            DBMSactive = DBMS_SQLITE;
+            fr.ShowDialog();
+        }
+        #endregion
+
+        #region Treinador
+        private void bDLocalToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeTreinadoresLista();
+            DBMSactive = DBMS_SQLSERVER_BD_LOCAL;
+            fr.ShowDialog();
+        }
+
+        private void mySQLToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeTreinadoresLista();
+            DBMSactive = DBMS_MYSQL;
+            fr.ShowDialog();
+        }
+
+        private void sQLServerToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeTreinadoresLista();
+            DBMSactive = DBMS_SQLSERVER;
+            fr.ShowDialog();
+        }
+
+        private void sQLiteToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Form fr = new FormEntidadeTreinadoresLista();
+            DBMSactive = DBMS_SQLITE;
+            fr.ShowDialog();
+        }
+        #endregion
+
+        #endregion
     }
 }

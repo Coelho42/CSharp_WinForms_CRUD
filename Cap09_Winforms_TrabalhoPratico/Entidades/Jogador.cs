@@ -31,12 +31,12 @@ namespace Cap09_Winforms_TrabalhoPratico
         public double altura { get; internal set; }
 
         /// <summary>
-        /// É um variável do tipo String que indica a posição do Jogador
+        /// É um variável do tipo String que indica a posição do Treinador
         /// </summary>
         public string posicao { get; internal set; }
 
         /// <summary>
-        /// É um variável do tipo String que indica a posição do Jogador
+        /// É um variável do tipo String que indica a posição do Treinador
         /// </summary>
         public Equipa equipa { get; internal set; }
         #endregion

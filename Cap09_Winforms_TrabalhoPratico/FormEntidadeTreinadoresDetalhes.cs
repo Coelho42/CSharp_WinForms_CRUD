@@ -79,7 +79,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                 case "Gravar":
 
                     // Se campos vazios, erro. Caso contrário passa os dados para a formUm
-                    if (textBoxNome.Text == "" || comboBoxEquipa.SelectedIndex == -1 || textBoxIdade.Text == "")
+                    if (textBoxNome.Text == "" || textBoxIdade.Text == "" || textBoxAltura.Text == "" || textBoxCategoria.Text == "" || comboBoxEquipa.SelectedIndex == -1)
                     {
                         MessageBox.Show("O Treinador não pode ser criada, porfavor preencha todos os espaços.");
                     }

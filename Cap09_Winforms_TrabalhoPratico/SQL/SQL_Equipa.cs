@@ -6,6 +6,9 @@ using System.Data.Common;
 using System.Text;
 using System.Windows.Forms;
 using static Cap09_Winforms_TrabalhoPratico.SQL_Connection;
+using static Cap09_Winforms_TrabalhoPratico.Settings;
+using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace Cap09_Winforms_TrabalhoPratico
 {
@@ -29,21 +32,66 @@ namespace Cap09_Winforms_TrabalhoPratico
                 using (DbConnection conn = OpenConnection())
                 {
                     // Prepara e executa o SQL DML
-                    using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                    switch (DBMSactive)
                     {
-                        sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.CommandText = "INSERT INTO Equipa"
-                        + "(Nome, Convocada, Liga)"
-                        + "VALUES(@nome,@convocada,@liga);";
-                        sqlCommand.Parameters.Add(new MySqlParameter("@nome", equipa.nome));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@convocada", equipa.convocada));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@liga", equipa.liga));
+                        case DBMS_SQLSERVER_BD_LOCAL:
+                        case DBMS_SQLSERVER:
+                            // Prepara e executa o SQL DML
+                            using (SqlCommand sqlCommand = ((SqlConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "INSERT INTO Equipa"
+                                + "(Nome, Convocada, Liga)"
+                                + "VALUES(@nome,@convocada,@liga);";
+                                sqlCommand.Parameters.Add(new SqlParameter("@nome", equipa.nome));
+                                sqlCommand.Parameters.Add(new SqlParameter("@convocada", equipa.convocada));
+                                sqlCommand.Parameters.Add(new SqlParameter("@liga", equipa.liga));
 
-                        // Tenta Executar e Se diferente de 1, provoca excessão saltanto para o catch
-                        if (sqlCommand.ExecuteNonQuery() != 1)
-                        {
-                            MessageBox.Show("Erro...");
-                        }
+                                // Tenta Executar e Se diferente de 1, provoca excessão saltanto para o catch
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
+                        case DBMS_MYSQL:
+                            // Prepara e executa o SQL DML
+                            using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "INSERT INTO Equipa"
+                                + "(Nome, Convocada, Liga)"
+                                + "VALUES(@nome,@convocada,@liga);";
+                                sqlCommand.Parameters.Add(new MySqlParameter("@nome", equipa.nome));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@convocada", equipa.convocada));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@liga", equipa.liga));
+
+                                // Tenta Executar e Se diferente de 1, provoca excessão saltanto para o catch
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
+                        case DBMS_SQLITE:
+                            // Prepara e executa o SQL DML
+                            using (SQLiteCommand sqlCommand = ((SQLiteConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "INSERT INTO Equipa"
+                                + "(Nome, Convocada, Liga)"
+                                + "VALUES(@nome,@convocada,@liga);";
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@nome", equipa.nome));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@convocada", equipa.convocada));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@liga", equipa.liga));
+
+                                // Tenta Executar e Se diferente de 1, provoca excessão saltanto para o catch
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
                     }                        
                 }
             }
@@ -75,42 +123,115 @@ namespace Cap09_Winforms_TrabalhoPratico
                 // Abre ligação ao DBMS Ativo
                 using (DbConnection conn = OpenConnection())
                 {
-                    query = "SELECT * FROM Equipa;";
-
                     // Prepara e executa o SQL DML
-                    using (MySqlCommand sqlCommand = new MySqlCommand())
+                    switch (DBMSactive)
                     {
-                        // Config da ligação
-                        sqlCommand.CommandText = query;
-                        sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.Connection = ((MySqlConnection)conn);
+                        case DBMS_SQLSERVER_BD_LOCAL:
+                        case DBMS_SQLSERVER:
+                            query = "SELECT * FROM Equipa;";
 
-                        // Reader recebe os dados da execução da query
-                        using (MySqlDataReader reader = sqlCommand.ExecuteReader())
-                        {
-                            // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
-                            while (reader.Read())
+                            // Prepara e executa o SQL DML
+                            using (SqlCommand sqlCommand = new SqlCommand())
                             {
-                                // Construção do objeto (com construtor mínimo)
-                                // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
-                                // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
-                                Equipa equipa = new Equipa(
-                                    reader.GetInt64(reader.GetOrdinal("ID")),
-                                    reader["Nome"].ToString(),
-                                    reader.GetBoolean(reader.GetOrdinal("Convocada")),
-                                    reader["Liga"].ToString()
-                                );
+                                // Config da ligação
+                                sqlCommand.CommandText = query;
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((SqlConnection)conn);
 
-                                //adiciona o obj à lista
-                                listaEquipas.Add(equipa);
+                                // Reader recebe os dados da execução da query
+                                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    while (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        Equipa equipa = new Equipa(
+                                            reader.GetInt32(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetBoolean(reader.GetOrdinal("Convocada")),
+                                            reader["Liga"].ToString()
+                                        );
+
+                                        //adiciona o obj à lista
+                                        listaEquipas.Add(equipa);
+                                    }
+                                }
                             }
-                        }
+                            break;
+                        case DBMS_MYSQL:
+                            query = "SELECT * FROM Equipa;";
+
+                            // Prepara e executa o SQL DML
+                            using (MySqlCommand sqlCommand = new MySqlCommand())
+                            {
+                                // Config da ligação
+                                sqlCommand.CommandText = query;
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((MySqlConnection)conn);
+
+                                // Reader recebe os dados da execução da query
+                                using (MySqlDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    while (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        Equipa equipa = new Equipa(
+                                            reader.GetInt32(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetBoolean(reader.GetOrdinal("Convocada")),
+                                            reader["Liga"].ToString()
+                                        );
+
+                                        //adiciona o obj à lista
+                                        listaEquipas.Add(equipa);
+                                    }
+                                }
+                            }
+                            break;
+                        case DBMS_SQLITE:
+                            query = "SELECT * FROM Equipa;";
+
+                            // Prepara e executa o SQL DML
+                            using (SQLiteCommand sqlCommand = new SQLiteCommand())
+                            {
+                                // Config da ligação
+                                sqlCommand.CommandText = query;
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((SQLiteConnection)conn);
+
+                                // Reader recebe os dados da execução da query
+                                using (SQLiteDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    while (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        Equipa equipa = new Equipa(
+                                            reader.GetInt32(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetBoolean(reader.GetOrdinal("Convocada")),
+                                            reader["Liga"].ToString()
+                                        );
+
+                                        //adiciona o obj à lista
+                                        listaEquipas.Add(equipa);
+                                    }
+                                }
+                            }
+                            break;
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show("Erro...");
+                MessageBox.Show(e.ToString());
                 return null;
             }
             return listaEquipas;
@@ -135,33 +256,102 @@ namespace Cap09_Winforms_TrabalhoPratico
                 using (DbConnection conn = OpenConnection())
                 {
                     // Prepara e executa o SQL DML
-                    using (MySqlCommand sqlCommand = new MySqlCommand())
+                    switch (DBMSactive)
                     {
-                        // Config da ligação
-                        sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.Connection = ((MySqlConnection)conn);
+                        case DBMS_SQLSERVER_BD_LOCAL:
+                        case DBMS_SQLSERVER:
+                            // Prepara e executa o SQL DML
+                            using (SqlCommand sqlCommand = new SqlCommand())
+                            {
+                                // Config da ligação
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((SqlConnection)conn);
 
-                        // SQL DDL
-                        sqlCommand.CommandText = "SELECT * FROM Equipa where Id=@Id;";
-                        sqlCommand.Parameters.Add(new MySqlParameter("@Id", id));
+                                // SQL DDL
+                                sqlCommand.CommandText = "SELECT * FROM Equipa where Id=@Id;";
+                                sqlCommand.Parameters.Add(new SqlParameter("@Id", id));
 
-                        // Reader recebe os dados da execução da query
-                        using (MySqlDataReader reader = sqlCommand.ExecuteReader())
-                        {
-                            // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
-                            if (reader.Read())
-                            {                                    
-                                // Construção do objeto (com construtor mínimo)
-                                // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
-                                // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
-                                equipa = new Equipa(
-                                    reader.GetInt64(reader.GetOrdinal("ID")),
-                                    reader["Nome"].ToString(),
-                                    reader.GetBoolean(reader.GetOrdinal("Convocada")),
-                                    reader["Liga"].ToString()
-                                );
+                                // Reader recebe os dados da execução da query
+                                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    if (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        equipa = new Equipa(
+                                            reader.GetInt32(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetBoolean(reader.GetOrdinal("Convocada")),
+                                            reader["Liga"].ToString()
+                                        );
+                                    }
+                                }
                             }
-                        }
+                            break;
+                        case DBMS_MYSQL:      
+                            // Prepara e executa o SQL DML
+                            using (MySqlCommand sqlCommand = new MySqlCommand())
+                            {
+                                // Config da ligação
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((MySqlConnection)conn);
+
+                                // SQL DDL
+                                sqlCommand.CommandText = "SELECT * FROM Equipa where Id=@Id;";
+                                sqlCommand.Parameters.Add(new MySqlParameter("@Id", id));
+
+                                // Reader recebe os dados da execução da query
+                                using (MySqlDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    if (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        equipa = new Equipa(
+                                            reader.GetInt32(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetBoolean(reader.GetOrdinal("Convocada")),
+                                            reader["Liga"].ToString()
+                                        );
+                                    }
+                                }
+                            }
+                            break;
+                        case DBMS_SQLITE:                          
+                            // Prepara e executa o SQL DML
+                            using (SQLiteCommand sqlCommand = new SQLiteCommand())
+                            {
+                                // Config da ligação
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((SQLiteConnection)conn);
+
+                                // SQL DDL
+                                sqlCommand.CommandText = "SELECT * FROM Equipa where Id=@Id;";
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@Id", id));
+
+                                // Reader recebe os dados da execução da query
+                                using (SQLiteDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    if (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        equipa = new Equipa(
+                                            reader.GetInt32(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetBoolean(reader.GetOrdinal("Convocada")),
+                                            reader["Liga"].ToString()
+                                        );
+                                    }
+                                }
+                            }
+                            break;
                     }
                 }
             }
@@ -187,28 +377,78 @@ namespace Cap09_Winforms_TrabalhoPratico
             {
                 // Abre ligação ao DBMS Ativo
                 using (DbConnection conn = OpenConnection())
-                {   
+                {
                     // Prepara e executa o SQL DML
-                    using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                    switch (DBMSactive)
                     {
-                        sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.CommandText = "UPDATE Equipa SET "
-                        + " Nome = @nome,"
-                        + " Convocada = @convocada,"
-                        + " Liga = @liga"
-                        + " WHERE Id = @Id;";
-                        sqlCommand.Parameters.Add(new MySqlParameter("@Id", equipa.id));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@nome", equipa.nome));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@convocada", equipa.convocada));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@liga", equipa.liga));
+                        case DBMS_SQLSERVER_BD_LOCAL:
+                        case DBMS_SQLSERVER:
+                            using (SqlCommand sqlCommand = ((SqlConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "UPDATE Equipa SET "
+                                + " Nome = @nome,"
+                                + " Convocada = @convocada,"
+                                + " Liga = @liga"
+                                + " WHERE Id = @Id;";
+                                sqlCommand.Parameters.Add(new SqlParameter("@Id", equipa.id));
+                                sqlCommand.Parameters.Add(new SqlParameter("@nome", equipa.nome));
+                                sqlCommand.Parameters.Add(new SqlParameter("@convocada", equipa.convocada));
+                                sqlCommand.Parameters.Add(new SqlParameter("@liga", equipa.liga));
 
-                        // Tenta executar o comando, que é suposto devolver 1
-                        if (sqlCommand.ExecuteNonQuery() != 1)
-                        {
-                            // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
-                            MessageBox.Show("Erro...");
-                        }
-                    }                   
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
+                        case DBMS_MYSQL:
+                            using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "UPDATE Equipa SET "
+                                + " Nome = @nome,"
+                                + " Convocada = @convocada,"
+                                + " Liga = @liga"
+                                + " WHERE Id = @Id;";
+                                sqlCommand.Parameters.Add(new MySqlParameter("@Id", equipa.id));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@nome", equipa.nome));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@convocada", equipa.convocada));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@liga", equipa.liga));
+
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
+                        case DBMS_SQLITE:
+                            using (SQLiteCommand sqlCommand = ((SQLiteConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "UPDATE Equipa SET "
+                                + " Nome = @nome,"
+                                + " Convocada = @convocada,"
+                                + " Liga = @liga"
+                                + " WHERE Id = @Id;";
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@Id", equipa.id));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@nome", equipa.nome));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@convocada", equipa.convocada));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@liga", equipa.liga));
+
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
+                    }                 
                 }
             }
             catch (Exception e)
@@ -234,26 +474,64 @@ namespace Cap09_Winforms_TrabalhoPratico
             {
                 // Abre ligação ao DBMS Ativo
                 using (DbConnection conn = OpenConnection())
-                {
-                    using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                {                   
+                    switch (DBMSactive)
                     {
-                        // Prepara e executa o SQL DML
-                        sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.CommandText = "DELETE FROM Equipa WHERE Id=@id;";
-                        sqlCommand.Parameters.Add(new MySqlParameter("@id", equipa.id));
+                        case DBMS_SQLSERVER_BD_LOCAL:
+                        case DBMS_SQLSERVER:
+                            using (SqlCommand sqlCommand = ((SqlConnection)conn).CreateCommand())
+                            {
+                                // Prepara e executa o SQL DML
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "DELETE FROM Equipa WHERE Id=@id;";
+                                sqlCommand.Parameters.Add(new SqlParameter("@id", equipa.id));
 
-                        // Tenta executar o comando, que é suposto devolver 1
-                        if (sqlCommand.ExecuteNonQuery() != 1)
-                        {
-                            // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
-                            throw new InvalidProgramException("SQL_Utilizador - del() - mysql: ");
-                        }
-                    }                      
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    throw new InvalidProgramException("Erro - del() - sqlserver: ");
+                                }
+                            }
+                            break;
+                        case DBMS_MYSQL:
+                            using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                            {
+                                // Prepara e executa o SQL DML
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "DELETE FROM Equipa WHERE Id=@id;";
+                                sqlCommand.Parameters.Add(new MySqlParameter("@id", equipa.id));
+
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    throw new InvalidProgramException("Erro - del() - sqlserver: ");
+                                }
+                            }
+                            break;
+                        case DBMS_SQLITE:
+                            using (SQLiteCommand sqlCommand = ((SQLiteConnection)conn).CreateCommand())
+                            {
+                                // Prepara e executa o SQL DML
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "DELETE FROM Equipa WHERE Id=@id;";
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@id", equipa.id));
+
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    throw new InvalidProgramException("Erro - del() - sqlserver: ");
+                                }
+                            }                              
+                            break;        
+                    }                    
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show("Erro...");
+                MessageBox.Show(e.ToString());
             }
         }
 

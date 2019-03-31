@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Cap09_Winforms_TrabalhoPratico.Sockets;
+using System;
+using System.Net.Sockets;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Cap09_Winforms_TrabalhoPratico
@@ -25,7 +28,7 @@ namespace Cap09_Winforms_TrabalhoPratico
             InitializeComponent();      // Initialize da Form
             this.strAction = strAction;     // Recebe a StrAction a partir do construtor da interface
             this.selectedIndex = selectedIndex;     // Recebe o index do registo selecionado na ListView
-            buttonAction.Text = strAction;      // Atualiza o texto do Button da Interface 
+            buttonAction.Text = strAction;      // Atualiza o texto do Button da Interface            
         }
         #endregion
 
@@ -175,6 +178,82 @@ namespace Cap09_Winforms_TrabalhoPratico
                         SQL_Equipa.Del(Controlo.GetListaEquipas()[selectedIndex]);      // Apaga a Equipa da base de dados
                     }
                    
+                    this.Close();       // Fecha a interface
+                    break;
+
+                case "Sockets":
+                    try
+                    {
+                        // Código dos dados para descodificação em receiveCalBack
+                        byte[] buffer1 = Encoding.UTF8.GetBytes("MSG_EQUIPA");
+
+                        if(textBoxConvocada.Text == "Sim" || textBoxConvocada.Text == "sim")
+                        {
+                            convocada = true;
+                        }
+                        else if (textBoxConvocada.Text == "Não" || textBoxConvocada.Text == "não")
+                        {
+                            convocada = false;
+                        }
+
+                        // Recolha e Serialização dos atributos da Pessoa pelo construtor
+                        MessageBox.Show(textBoxNome.Text.ToString());
+                        Equipa equipa = new Equipa(textBoxNome.Text, convocada, textBoxLiga.Text);
+                        byte[] buffer2 = equipa.ToByteArray();
+                        MessageBox.Show(equipa.nome.ToString() + " " + equipa.convocada.ToString() + " " + equipa.liga.ToString());
+
+                        // Concatenação dos 2 arrays num 3º. BlockCopy é a opção
+                        // preferida, mas há outras muito mais rápidas.
+                        // Copia N bytes de um array origem, com início no elemento x
+                        // para um array de destino, começando num elemento y
+
+                        // Criação do Array de Bytes final com a dimensão dos 2 Arrays
+                        byte[] buffer = new byte[buffer1.Length + buffer2.Length];
+
+                        // Cópia do Array1 para início do Array final
+                        Buffer.BlockCopy(
+                            buffer1,            // Array Origem
+                            0,                  // início da cópia no Array origem
+                            buffer,             // Array Destino
+                            0,                  // início da concatenação no Array destino
+                            buffer1.Length);    // nº de bytes a copiar
+
+                        // Cópia do Array2 para o Array final, a seguir ao Array1
+                        Buffer.BlockCopy(
+                            buffer2,            // Array Origem
+                            0,                  // início da cópia no Array origem
+                            buffer,             // Array Destino
+                            buffer1.Length,     // início da concatenação no Array destino
+                            buffer2.Length);    // nº de bytes a copiar
+
+                        // Início do envio dos dados através do socket em 2 passos
+                        // 1º BeginSend() cria nova thread
+                        // 2º Envia o método callBack para a thread, onde é executado, 
+                        // libertando a presente thread.
+                        // O ultimo argumento é o próprio socket que será entregue ao método callBack
+                        // através de um parâmetro Async Result (ver o método na classe Networking)
+                        if (Tools.IsServer)
+                        {
+                            NetWorkingServer.socketToClient.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, NetWorkingServer.SendCallback, NetWorkingServer.socketToClient);
+                        }
+                        else
+                        {
+                            NetWorkingCliente.socketToServer.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, NetWorkingCliente.SendCallBack, NetWorkingCliente.socketToServer);
+                        }                      
+                    }
+                    catch (SocketException ex)
+                    {
+                        Tools.ShowDialog("Client: ButtonSendTring: SocketException:\n\n" + ex.Message);
+                    }
+                    catch (ObjectDisposedException ex)
+                    {
+                        Tools.ShowDialog("Client: ButtonSend: ObjectDisposedException:\n\n" + ex.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.ShowDialog("Client: ButtonSend: Exceção genérica:\n\n" + ex.Message);
+                    }
+
                     this.Close();       // Fecha a interface
                     break;
             }

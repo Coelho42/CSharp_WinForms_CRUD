@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Text;
+using System.Data.SQLite;
 using System.Windows.Forms;
 using static Cap09_Winforms_TrabalhoPratico.SQL_Connection;
+using static Cap09_Winforms_TrabalhoPratico.Settings;
+using System.Data.SqlClient;
 
 namespace Cap09_Winforms_TrabalhoPratico
 {
@@ -29,24 +31,74 @@ namespace Cap09_Winforms_TrabalhoPratico
                 using (DbConnection conn = OpenConnection())
                 {
                     // Prepara e executa o SQL DML
-                    using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                    switch (DBMSactive)
                     {
-                        sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.CommandText = "INSERT INTO Treinador"
-                        + "(Nome, Idade, Altura, Categoria, EquipaID)"
-                        + "VALUES(@nome,@idade,@altura,@categoria,@equipaid);";
-                        sqlCommand.Parameters.Add(new MySqlParameter("@nome", treinador.nome));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@idade", treinador.idade));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@altura", treinador.altura));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@categoria", treinador.categoria));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@equipaid", treinador.equipa.id));
+                        case DBMS_SQLSERVER_BD_LOCAL:
+                        case DBMS_SQLSERVER:
+                            // Prepara e executa o SQL DML
+                            using (SqlCommand sqlCommand = ((SqlConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "INSERT INTO Treinador"
+                                + "(Nome, Idade, Altura, Categoria, EquipaID)"
+                                + "VALUES(@nome,@idade,@altura,@categoria,@equipaid);";
+                                sqlCommand.Parameters.Add(new SqlParameter("@nome", treinador.nome));
+                                sqlCommand.Parameters.Add(new SqlParameter("@idade", treinador.idade));
+                                sqlCommand.Parameters.Add(new SqlParameter("@altura", treinador.altura));
+                                sqlCommand.Parameters.Add(new SqlParameter("@categoria", treinador.categoria));
+                                sqlCommand.Parameters.Add(new SqlParameter("@equipaid", treinador.equipa.id));
 
-                        // Tenta Executar e Se diferente de 1, provoca excessão saltanto para o catch
-                        if (sqlCommand.ExecuteNonQuery() != 1)
-                        {
-                            MessageBox.Show("Erro...");
-                        }
-                    }                        
+                                // Tenta Executar e Se diferente de 1, provoca excessão saltanto para o catch
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
+                        case DBMS_MYSQL:
+                            // Prepara e executa o SQL DML
+                            using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "INSERT INTO Treinador"
+                                + "(Nome, Idade, Altura, Categoria, EquipaID)"
+                                + "VALUES(@nome,@idade,@altura,@categoria,@equipaid);";
+                                sqlCommand.Parameters.Add(new MySqlParameter("@nome", treinador.nome));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@idade", treinador.idade));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@altura", treinador.altura));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@categoria", treinador.categoria));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@equipaid", treinador.equipa.id));
+
+                                // Tenta Executar e Se diferente de 1, provoca excessão saltanto para o catch
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
+                        case DBMS_SQLITE:
+                            // Prepara e executa o SQL DML
+                            using (SQLiteCommand sqlCommand = ((SQLiteConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "INSERT INTO Treinador"
+                                + "(Nome, Idade, Altura, Categoria, EquipaID)"
+                                + "VALUES(@nome,@idade,@altura,@categoria,@equipaid);";
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@nome", treinador.nome));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@idade", treinador.idade));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@altura", treinador.altura));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@categoria", treinador.categoria));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@equipaid", treinador.equipa.id));
+
+                                // Tenta Executar e Se diferente de 1, provoca excessão saltanto para o catch
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
+
+                    }
                 }
             }
             catch (Exception e)
@@ -68,7 +120,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         /// <returns>Lista de objetos</returns>
         static internal List<Treinador> GetAll()
         {
-            List<Treinador> listaTreinadores = new List<Treinador>();   // Lista Principal
+            List<Treinador> listaJogadores = new List<Treinador>();   // Lista Principal
             String query = "";
 
             //Execução do SQL DML sob controlo do try catch
@@ -77,44 +129,120 @@ namespace Cap09_Winforms_TrabalhoPratico
                 // Abre ligação ao DBMS Ativo
                 using (DbConnection conn = OpenConnection())
                 {
-                    query = "SELECT * FROM Treinador;";
-
                     // Prepara e executa o SQL DML
-                    using (MySqlCommand sqlCommand = new MySqlCommand())
+                    switch (DBMSactive)
                     {
-                        // Config da ligação
-                        sqlCommand.CommandText = query;
-                        sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.Connection = ((MySqlConnection)conn);
+                        case DBMS_SQLSERVER_BD_LOCAL:
+                        case DBMS_SQLSERVER:
+                            query = "SELECT * FROM Treinador;";
 
-                        // Reader recebe os dados da execução da query
-                        using (MySqlDataReader reader = sqlCommand.ExecuteReader())
-                        {
-                            // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
-                            while (reader.Read())
+                            // Prepara e executa o SQL DML
+                            using (SqlCommand sqlCommand = new SqlCommand())
                             {
-                                // Construção do objeto (com construtor mínimo)
-                                // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
-                                // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
-                                Treinador treinador = new Treinador(
-                                    reader.GetInt32(reader.GetOrdinal("ID")),
-                                    reader["Nome"].ToString(),
-                                    reader.GetInt32(reader.GetOrdinal("Idade")),
-                                    reader.GetDouble(reader.GetOrdinal("Altura")),
-                                    reader["Categoria"].ToString(),
-                                    new Equipa(reader.GetInt64(reader.GetOrdinal("EquipaID")))
-                                );
+                                // Config da ligação
+                                sqlCommand.CommandText = query;
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((SqlConnection)conn);
 
-                                //adiciona o obj à lista
-                                listaTreinadores.Add(treinador);
+                                // Reader recebe os dados da execução da query
+                                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    while (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        Treinador treinador = new Treinador(
+                                            reader.GetInt32(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetInt32(reader.GetOrdinal("Idade")),
+                                            reader.GetFloat(reader.GetOrdinal("Altura")),
+                                            reader["Categoria"].ToString(),
+                                            new Equipa(reader.GetInt32(reader.GetOrdinal("EquipaID")))
+                                        );
+
+                                        //adiciona o obj à lista
+                                        listaJogadores.Add(treinador);
+                                    }
+                                }
                             }
-                        }
+                            break;
+                        case DBMS_MYSQL:
+                            query = "SELECT * FROM Treinador;";
+                            // Prepara e executa o SQL DML
+                            using (MySqlCommand sqlCommand = new MySqlCommand())
+                            {
+                                // Config da ligação
+                                sqlCommand.CommandText = query;
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((MySqlConnection)conn);
+
+                                // Reader recebe os dados da execução da query
+                                using (MySqlDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    while (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        Treinador treinador = new Treinador(
+                                           reader.GetInt32(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetInt32(reader.GetOrdinal("Idade")),
+                                            reader.GetFloat(reader.GetOrdinal("Altura")),
+                                            reader["Categoria"].ToString(),
+                                            new Equipa(reader.GetInt32(reader.GetOrdinal("EquipaID")))
+                                        );
+
+                                        //adiciona o obj à lista
+                                        listaJogadores.Add(treinador);
+                                    }
+                                }
+                            }
+                            break;
+                        case DBMS_SQLITE:
+                            query = "SELECT * FROM Treinador;";
+
+                            // Prepara e executa o SQL DML
+                            using (SQLiteCommand sqlCommand = new SQLiteCommand())
+                            {
+                                // Config da ligação
+                                sqlCommand.CommandText = query;
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((SQLiteConnection)conn);
+
+                                // Reader recebe os dados da execução da query
+                                using (SQLiteDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    while (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        Treinador treinador = new Treinador(
+                                            reader.GetInt32(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetInt32(reader.GetOrdinal("Idade")),
+                                            reader.GetFloat(reader.GetOrdinal("Altura")),
+                                            reader["Categoria"].ToString(),
+                                            new Equipa(reader.GetInt32(reader.GetOrdinal("EquipaID")))
+                                        );
+
+                                        //adiciona o obj à lista
+                                        listaJogadores.Add(treinador);
+                                    }
+                                }
+                            }
+                            break;
                     }
-                }
-                // Se Entidade tem FKs, Executar um foreach à lista de objetos extraídos e completar com o objeto fk, usando um get(id) à SQL respetiva
-                foreach (Treinador treinador in listaTreinadores)
-                {
-                    treinador.equipa = SQL_Equipa.Get(treinador.equipa.id);
+                    // Se Entidade tem FKs, Executar um foreach à lista de objetos extraídos e completar com o objeto fk, usando um get(id) à SQL respetiva
+                    foreach (Treinador treinador in listaJogadores)
+                    {
+                        treinador.equipa = SQL_Equipa.Get(treinador.equipa.id);
+                    }
                 }
             }
             catch (Exception e)
@@ -122,7 +250,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                 MessageBox.Show("Erro...");
                 return null;
             }
-            return listaTreinadores;
+            return listaJogadores;
         }
 
         /// <summary>
@@ -144,38 +272,112 @@ namespace Cap09_Winforms_TrabalhoPratico
                 using (DbConnection conn = OpenConnection())
                 {
                     // Prepara e executa o SQL DML
-                    using (MySqlCommand sqlCommand = new MySqlCommand())
+                    switch (DBMSactive)
                     {
-                        // Config da ligação
-                        sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.Connection = ((MySqlConnection)conn);
+                        case DBMS_SQLSERVER_BD_LOCAL:
+                        case DBMS_SQLSERVER:
+                            // Prepara e executa o SQL DML
+                            using (SqlCommand sqlCommand = new SqlCommand())
+                            {
+                                // Config da ligação
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((SqlConnection)conn);
 
-                        // SQL DDL
-                        sqlCommand.CommandText = "SELECT * FROM Treinador where Id=@Id;";
-                        sqlCommand.Parameters.Add(new MySqlParameter("@Id", id));
+                                // SQL DDL
+                                sqlCommand.CommandText = "SELECT * FROM Treinador where Id=@Id;";
+                                sqlCommand.Parameters.Add(new MySqlParameter("@Id", id));
 
-                        // Reader recebe os dados da execução da query
-                        using (MySqlDataReader reader = sqlCommand.ExecuteReader())
-                        {
-                            // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
-                            if (reader.Read())
-                            {                                    
-                                // Construção do objeto (com construtor mínimo)
-                                // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
-                                // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
-                                treinador = new Treinador(
-                                    reader.GetInt32(reader.GetOrdinal("ID")),
-                                    reader["Nome"].ToString(),
-                                    reader.GetInt32(reader.GetOrdinal("Idade")),
-                                    reader.GetDouble(reader.GetOrdinal("Altura")),
-                                    reader["Categoria"].ToString(),
-                                    new Equipa(reader.GetInt64(reader.GetOrdinal("EquipaID")))
-                                );
+                                // Reader recebe os dados da execução da query
+                                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    if (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        treinador = new Treinador(
+                                            reader.GetInt64(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetInt32(reader.GetOrdinal("Idade")),
+                                            reader.GetFloat(reader.GetOrdinal("Altura")),
+                                            reader["Categoria"].ToString(),
+                                            new Equipa(reader.GetInt32(reader.GetOrdinal("EquipaID")))
+                                        );
+                                    }
+                                }
                             }
-                        }
+                            break;
+                        case DBMS_MYSQL:
+                            // Prepara e executa o SQL DML
+                            using (MySqlCommand sqlCommand = new MySqlCommand())
+                            {
+                                // Config da ligação
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((MySqlConnection)conn);
+
+                                // SQL DDL
+                                sqlCommand.CommandText = "SELECT * FROM Treinador where Id=@Id;";
+                                sqlCommand.Parameters.Add(new MySqlParameter("@Id", id));
+
+                                // Reader recebe os dados da execução da query
+                                using (MySqlDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    if (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        treinador = new Treinador(
+                                            reader.GetInt64(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetInt32(reader.GetOrdinal("Idade")),
+                                            reader.GetFloat(reader.GetOrdinal("Altura")),
+                                            reader["Categoria"].ToString(),
+                                            new Equipa(reader.GetInt32(reader.GetOrdinal("EquipaID")))
+                                        );
+                                    }
+                                }
+                            }
+                            break;
+                        case DBMS_SQLITE:
+                            // Prepara e executa o SQL DML
+                            using (SQLiteCommand sqlCommand = new SQLiteCommand())
+                            {
+                                // Config da ligação
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.Connection = ((SQLiteConnection)conn);
+
+                                // SQL DDL
+                                sqlCommand.CommandText = "SELECT * FROM Treinador where Id=@Id;";
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@Id", id));
+
+                                // Reader recebe os dados da execução da query
+                                using (SQLiteDataReader reader = sqlCommand.ExecuteReader())
+                                {
+                                    // Extração dos dados do reader para a lista, um a um: registo tabela -> new Obj -> Lista<Objs>
+                                    if (reader.Read())
+                                    {
+                                        // Construção do objeto (com construtor mínimo)
+                                        // Se objeto tem FKs, Não usar SQL***.get() para construir o objeto fk dentro do construtor. gera exceção.
+                                        // Criar o obj FK com o Construtor de Id e depois completar o objeto a seguir à connection.close.
+                                        treinador = new Treinador(
+                                             reader.GetInt64(reader.GetOrdinal("ID")),
+                                            reader["Nome"].ToString(),
+                                            reader.GetInt32(reader.GetOrdinal("Idade")),
+                                            reader.GetFloat(reader.GetOrdinal("Altura")),
+                                            reader["Categoria"].ToString(),
+                                            new Equipa(reader.GetInt32(reader.GetOrdinal("EquipaID")))
+                                        );
+                                    }
+                                }
+                            }
+                            break;
+
                     }
-                }               
-                treinador.equipa = SQL_Equipa.Get(treinador.equipa.id);
+                    treinador.equipa = SQL_Equipa.Get(treinador.equipa.id);
+                }
             }
             catch (Exception e)
             {
@@ -183,7 +385,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                 return null;
             }
             return treinador;
-        }        
+        }
         #endregion
 
         #region Update
@@ -199,32 +401,93 @@ namespace Cap09_Winforms_TrabalhoPratico
             {
                 // Abre ligação ao DBMS Ativo
                 using (DbConnection conn = OpenConnection())
-                {   
+                {
                     // Prepara e executa o SQL DML
-                    using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                    switch (DBMSactive)
                     {
-                        sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.CommandText = "UPDATE Treinador SET "
-                        + " Nome = @nome,"
-                        + " Idade = @idade,"
-                        + " Altura = @altura,"
-                        + " Categoria = @categoria,"
-                        + " EquipaID = @equipaid"
-                        + " WHERE Id = @Id;";
-                        sqlCommand.Parameters.Add(new MySqlParameter("@Id", treinador.id));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@nome", treinador.nome));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@idade", treinador.idade));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@altura", treinador.altura));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@categoria", treinador.categoria));
-                        sqlCommand.Parameters.Add(new MySqlParameter("@equipaid", treinador.equipa.id));
+                        case DBMS_SQLSERVER_BD_LOCAL:
+                        case DBMS_SQLSERVER:
+                            // Prepara e executa o SQL DML
+                            using (SqlCommand sqlCommand = ((SqlConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "UPDATE Treinador SET "
+                                + " Nome = @nome,"
+                                + " Idade = @idade,"
+                                + " Altura = @altura,"
+                                + " Categoria = @categoria,"
+                                + " EquipaID = @equipaid"
+                                + " WHERE Id = @Id;";
+                                sqlCommand.Parameters.Add(new SqlParameter("@Id", treinador.id));
+                                sqlCommand.Parameters.Add(new SqlParameter("@nome", treinador.nome));
+                                sqlCommand.Parameters.Add(new SqlParameter("@idade", treinador.idade));
+                                sqlCommand.Parameters.Add(new SqlParameter("@altura", treinador.altura));
+                                sqlCommand.Parameters.Add(new SqlParameter("@categoria", treinador.categoria));
+                                sqlCommand.Parameters.Add(new SqlParameter("@equipaid", treinador.equipa.id));
 
-                        // Tenta executar o comando, que é suposto devolver 1
-                        if (sqlCommand.ExecuteNonQuery() != 1)
-                        {
-                            // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
-                            MessageBox.Show("Erro...");
-                        }
-                    }                   
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
+                        case DBMS_MYSQL:
+                            // Prepara e executa o SQL DML
+                            using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "UPDATE Treinador SET "
+                                + " Nome = @nome,"
+                                + " Idade = @idade,"
+                                + " Altura = @altura,"
+                                + " Categoria = @categoria,"
+                                + " EquipaID = @equipaid"
+                                + " WHERE Id = @Id;";
+                                sqlCommand.Parameters.Add(new MySqlParameter("@Id", treinador.id));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@nome", treinador.nome));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@idade", treinador.idade));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@altura", treinador.altura));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@categoria", treinador.categoria));
+                                sqlCommand.Parameters.Add(new MySqlParameter("@equipaid", treinador.equipa.id));
+
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
+                        case DBMS_SQLITE:
+                            // Prepara e executa o SQL DML
+                            using (SQLiteCommand sqlCommand = ((SQLiteConnection)conn).CreateCommand())
+                            {
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "UPDATE Treinador SET "
+                                + " Nome = @nome,"
+                                + " Idade = @idade,"
+                                + " Altura = @altura,"
+                                + " Categoria = @categoria,"
+                                + " EquipaID = @equipaid"
+                                + " WHERE Id = @Id;";
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@Id", treinador.id));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@nome", treinador.nome));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@idade", treinador.idade));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@altura", treinador.altura));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@categoria", treinador.categoria));
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@equipaid", treinador.equipa.id));
+
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    MessageBox.Show("Erro...");
+                                }
+                            }
+                            break;
+                    }
                 }
             }
             catch (Exception e)
@@ -251,20 +514,58 @@ namespace Cap09_Winforms_TrabalhoPratico
                 // Abre ligação ao DBMS Ativo
                 using (DbConnection conn = OpenConnection())
                 {
-                    using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                    switch (DBMSactive)
                     {
-                        // Prepara e executa o SQL DML
-                        sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.CommandText = "DELETE FROM Treinador WHERE Id=@id;";
-                        sqlCommand.Parameters.Add(new MySqlParameter("@id", treinador.id));
+                        case DBMS_SQLSERVER_BD_LOCAL:
+                        case DBMS_SQLSERVER:
+                            using (SqlCommand sqlCommand = ((SqlConnection)conn).CreateCommand())
+                            {
+                                // Prepara e executa o SQL DML
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "DELETE FROM Treinador WHERE Id=@id;";
+                                sqlCommand.Parameters.Add(new SqlParameter("@id", treinador.id));
 
-                        // Tenta executar o comando, que é suposto devolver 1
-                        if (sqlCommand.ExecuteNonQuery() != 1)
-                        {
-                            // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
-                            throw new InvalidProgramException("SQL_Utilizador - del() - mysql: ");
-                        }
-                    }                      
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    throw new InvalidProgramException("Erro - del() - sqlserver: ");
+                                }
+                            }
+                            break;
+                        case DBMS_MYSQL:
+                            using (MySqlCommand sqlCommand = ((MySqlConnection)conn).CreateCommand())
+                            {
+                                // Prepara e executa o SQL DML
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "DELETE FROM Treinador WHERE Id=@id;";
+                                sqlCommand.Parameters.Add(new MySqlParameter("@id", treinador.id));
+
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    throw new InvalidProgramException("Erro - del() - sqlserver: ");
+                                }
+                            }
+                            break;
+                        case DBMS_SQLITE:
+                            using (SQLiteCommand sqlCommand = ((SQLiteConnection)conn).CreateCommand())
+                            {
+                                // Prepara e executa o SQL DML
+                                sqlCommand.CommandType = CommandType.Text;
+                                sqlCommand.CommandText = "DELETE FROM Treinador WHERE Id=@id;";
+                                sqlCommand.Parameters.Add(new SQLiteParameter("@id", treinador.id));
+
+                                // Tenta executar o comando, que é suposto devolver 1
+                                if (sqlCommand.ExecuteNonQuery() != 1)
+                                {
+                                    // Se diferente, inverte o commit e Provoca a excessão saltanto para o catch
+                                    throw new InvalidProgramException("Erro - del() - sqlserver: ");
+                                }
+                            }
+                            break;
+                    }
                 }
             }
             catch (Exception e)

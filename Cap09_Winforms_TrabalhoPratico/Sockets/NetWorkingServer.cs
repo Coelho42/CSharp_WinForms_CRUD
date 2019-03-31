@@ -201,7 +201,7 @@ namespace Cap09_Winforms_TrabalhoPratico.Sockets
                 // conclui o envio da mensagem de forma assíncrona
 
                 // Conversão da msg para um byte array
-                Byte[] sendDataBuffer = Encoding.UTF8.GetBytes("MSG_SV_OK");
+                Byte[] sendDataBuffer = Encoding.UTF8.GetBytes("MSG__SV_OK");
 
                 // Passo 1: BeginSend() cria a thread que executa o método SendCallback()
                 localSocketToClient.BeginSend(
@@ -275,23 +275,17 @@ namespace Cap09_Winforms_TrabalhoPratico.Sockets
 
                 switch (msgCode)
                 {
-                    case "MSG_PERSON":
+                    case "MSG_EQUIPA":
                         // O array de bytes contém os dados de uma pessoa 
                         // => contrutor com desSerialização
-                        //Pessoa person = new Pessoa(buffer);
+                        Equipa equipa = new Equipa(buffer);
 
                         // Adicão da pessoa à DataGrid
                         // A FormServer foi passada para um atributo local, 
                         // desta class para a thread possa aceder de forma
                         // segura ao método da thread principal que insere
                         // dados na DataGridView.
-                        //formWork.SubmitPersonToDataGrid(person);
-                        break;
-                    case "MSG_STRING":
-                        // técnica1: extrai a partir do byte 10, uma string de tamanho received - a msgCode)
-                        string message = Encoding.UTF8.GetString(buffer, 10, messageLengthReceived-10);
-
-                        formWork.UpdateTextBoxStringsReceived(message);
+                        formWork.SubmitEquipaToDataGrid(equipa);
                         break;
                 }
 

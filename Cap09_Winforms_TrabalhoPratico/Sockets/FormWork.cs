@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Net.Sockets;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Cap09_Winforms_TrabalhoPratico.Sockets
@@ -44,6 +40,7 @@ namespace Cap09_Winforms_TrabalhoPratico.Sockets
                 this.Text = "Cliente";
                 buttonConnect.Text = "Connect to Server";
             }
+            buttonEquipas.Enabled = false;
         }
 
         /// <summary>
@@ -55,10 +52,6 @@ namespace Cap09_Winforms_TrabalhoPratico.Sockets
         private void FormWork_Load(object sender, EventArgs e)
         {
             UpdateControlStates(false);
-
-            // Botão de criação de nova instancia apenas para Server
-            if (Tools.IsServer) buttonNewClient.Visible = true;
-            else buttonNewClient.Visible = false;
         }
 
         #endregion
@@ -70,36 +63,11 @@ namespace Cap09_Winforms_TrabalhoPratico.Sockets
         /// Invoke permite acesso seguro de uma  thread 
         /// secundária à dataGrid que está na thread principal
         /// </summary>
-        internal void SubmitPersonToDataGrid()
+        internal void SubmitEquipaToDataGrid(Equipa equipa)
         {
             Invoke((Action)delegate
             {
-                //dataGridView.Rows.Add(pessoa.Name, pessoa.Age, pessoa.IsMale);
-            });
-        }
-
-        /// <summary>
-        /// Remove uma pessoa da dataGridView
-        /// Invoke permite acesso seguro de uma  thread 
-        /// secundária à dataGrid que está na thread principal
-        /// </summary>
-        /// <param name="pessoa"></param>
-        internal void RemovePersonToDataGrid(/*Pessoa pessoa*/)
-        {
-            Invoke((Action)delegate
-            {
-                foreach (DataGridViewRow row in dataGridView.Rows)
-                {
-                    /*
-                    if (row.Cells[0].Value != null &&
-                         row.Cells[0].Value.ToString() == pessoa.Name &&
-                         row.Cells[1].Value.ToString() == pessoa.IsMale.ToString() &&
-                         row.Cells[0].Value.ToString() == pessoa.Age.ToString())
-                    {
-                        dataGridView.Rows.Remove(row);
-                    }
-                    */
-                }
+                dataGridViewEquipas.Rows.Add(equipa.nome, equipa.convocada, equipa.liga);
             });
         }
 
@@ -131,10 +99,6 @@ namespace Cap09_Winforms_TrabalhoPratico.Sockets
                 // Objetos da Ligação
                 buttonConnect.Enabled = !toggle;
                 textBoxIPAddress.Enabled = !toggle;
-
-                // Objetos de transmissão
-                groupBoxObjetos.Enabled = toggle;
-                groupBoxStrings.Enabled = toggle;
             });
         }
 
@@ -148,33 +112,9 @@ namespace Cap09_Winforms_TrabalhoPratico.Sockets
             {
                 labelConnectionState.Text = state;
                 labelConnectionState.ForeColor = color;
+                buttonEquipas.Enabled = true;
             });
         }
-
-        /// <summary>
-        /// Atualização da Imagem do estado da ligação
-        /// </summary>
-        /// <param name="state"></param>
-        internal void UpdateConnectionImage(Image newImage)
-        {
-            Invoke((Action)delegate
-            {
-                pictureBoxConnection.Image = newImage;
-            });
-        }
-
-        /// <summary>
-        /// Atualização TextBoxStringReceived com a nova string recebida
-        /// </summary>
-        /// <param name="state"></param>
-        internal void UpdateTextBoxStringsReceived(string msg)
-        {
-            Invoke((Action)delegate
-            {
-                textBoxStringsReceived.Text += msg + "\r\n";
-            });
-        }
-
 
         #endregion
 
@@ -191,7 +131,7 @@ namespace Cap09_Winforms_TrabalhoPratico.Sockets
             // Startup do server ou client
             if (Tools.IsServer)
             {
-                NetWorkingServer.StartServer(this);
+                NetWorkingServer.StartServer(this);               
             }
             else
             {
@@ -200,167 +140,16 @@ namespace Cap09_Winforms_TrabalhoPratico.Sockets
 
             // Desativa botão após iniciar a ligação.
             buttonConnect.Enabled = false;
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // ENVIO DE MENSAGENS
-        // Para enviar vários tipos de dados, optou-se por usar os 1ºs 10 bytes para 
-        // o código da mensagem. este código vai permitir ao método ReceiveCallBack
-        // perceber o tipo de mensagem que recebe, podendo extrai-la em conformidade.
-        // Os códigos são:
-        // - MSG_STRING para enviar apenas strings
-        // - MSG_PERSON para enviar objetos Pessoa
-        // - MSG_SRV_OK para o Server notificar o Client que a ligação estabelecida e
-        //   assim poder alterar o aspeto da interface para iniciar o envio de msgs.
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        /// <summary>
-        /// Envia uma String
-        /// O array de bytes a enviar é composto por duas partes
-        /// 1º MSG_STRING
-        /// 2º a string da menssagem
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonSendString_Click(object sender, EventArgs e)
-        {
-            // proteção do preenchimento do campo nome.
-            if (textBoxStringtoSend.Text.Equals(""))
-            {
-                Tools.ShowDialog("Preencha o campo!");
-                return;
-            }
-
-            try
-            {
-                // Preparação dos dados (Sempre num array de bytes)
-                // 1ºs 10 bytes para o código, seguido da string da msg
-                // A serialização Converte toda a string para um byte array
-                Byte[] buffer = Encoding.UTF8.GetBytes("MSG_STRING" + textBoxStringtoSend.Text.Trim());
-
-                // Início do envio dos dados através do socket em 2 passos
-                // 1º BeginSend() cria nova thread
-                // 2º Envia o método callBack para a thread, onde é executado, 
-                // libertando a presente thread.
-                // O ultimo argumento é o próprio socket que será entregue ao método callBack
-                // através de um parâmetro Async Result (ver o método na classe Networking)
-                if (Tools.IsServer)
-                {
-
-                    NetWorkingServer.socketToClient.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, NetWorkingServer.SendCallback, NetWorkingServer.socketToClient);
-                }
-                else
-                {
-                    NetWorkingCliente.socketToServer.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, NetWorkingCliente.SendCallBack, NetWorkingCliente.socketToServer);
-                }
-
-                // Limpesa da textBox
-                textBoxStringtoSend.Text = "";
-            }
-            catch (SocketException ex)
-            {
-                UpdateControlStates(false); // atualiza os botões da form
-                Tools.ShowDialog("Client: ButtonSendTring: SocketException:\n\n" + ex.Message);
-            }
-            catch (ObjectDisposedException ex)
-            {
-                Tools.ShowDialog("Client: ButtonSend: ObjectDisposedException:\n\n" + ex.Message);
-            }
-            catch (Exception ex)
-            {
-                Tools.ShowDialog("Client: ButtonSend: Exceção genérica:\n\n" + ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Envia um Objeto Pessoa serializado
-        /// O array de bytes a enviar é composto por duas partes
-        /// 1º MSG_PERSON
-        /// 2º o objeto serializado
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonSendObject_Click(object sender, EventArgs e)
-        {
-            /*
-            // proteção do preenchimento do campo nome.
-            if (textBoxPessoaNome.Text.Equals(""))
-            {
-                Tools.ShowDialog("Preencha o campo nome!");
-                return;
-            }
-
-            try
-            {
-                // Código dos dados para descodificação em receiveCalBack
-                byte[] buffer1 = Encoding.UTF8.GetBytes("MSG_PERSON");
-
-                // Recolha e Serialização dos atributos da Pessoa pelo construtor
-                Pessoa pessoa = new Pessoa(checkBoxPessoaGenero.Checked, (ushort)numberBoxPessoaIdade.Value, textBoxPessoaNome.Text);
-                byte[] buffer2 = pessoa.ToByteArray();
-
-                // Concatenação dos 2 arrays num 3º. BlockCopy é a opção
-                // preferida, mas há outras muito mais rápidas.
-                // Copia N bytes de um array origem, com início no elemento x
-                // para um array de destino, começando num elemento y
-
-                // Criação do Array de Bytes final com a dimensão dos 2 Arrays
-                byte[] buffer = new byte[buffer1.Length + buffer2.Length];
-
-                // Cópia do Array1 para início do Array final
-                Buffer.BlockCopy(
-                    buffer1,            // Array Origem
-                    0,                  // início da cópia no Array origem
-                    buffer,             // Array Destino
-                    0,                  // início da concatenação no Array destino
-                    buffer1.Length);    // nº de bytes a copiar
-
-                // Cópia do Array2 para o Array final, a seguir ao Array1
-                Buffer.BlockCopy(
-                    buffer2,            // Array Origem
-                    0,                  // início da cópia no Array origem
-                    buffer,             // Array Destino
-                    buffer1.Length,     // início da concatenação no Array destino
-                    buffer2.Length);    // nº de bytes a copiar
-
-                // Início do envio dos dados através do socket em 2 passos
-                // 1º BeginSend() cria nova thread
-                // 2º Envia o método callBack para a thread, onde é executado, 
-                // libertando a presente thread.
-                // O ultimo argumento é o próprio socket que será entregue ao método callBack
-                // através de um parâmetro Async Result (ver o método na classe Networking)
-                if (Tools.IsServer)
-                {
-                    NetWorkingServer.socketToClient.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, NetWorkingServer.SendCallback, NetWorkingServer.socketToClient);
-                }
-                else
-                {
-                    NetWorkingCliente.socketToServer.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, NetWorkingCliente.SendCallBack, NetWorkingCliente.socketToServer);
-                }
-            }
-            catch (SocketException ex)
-            {
-                Tools.ShowDialog("FormWork: ButtonSend: SocketException:" + ex.Message);
-                UpdateControlStates(false); // atualiza os botões da form
-            }
-            catch (ObjectDisposedException ex)
-            {
-                Tools.ShowDialog("FormWork: ButtonSend: ObjectDisposedException: " + ex.Message);
-                UpdateControlStates(false); // atualiza os botões da form
-            }
-            catch (Exception ex)
-            {
-                Tools.ShowDialog("FormWork: ButtonSend: Exceção genérica: " + ex.Message);
-                UpdateControlStates(false); // atualiza os botões da form
-            }
-            */
-        }
-
+        }      
         #endregion
 
-        private void labelConnectionState_Click(object sender, EventArgs e)
-        {
+        #region Abre Interfaces
 
+        private void buttonEquipas_Click(object sender, EventArgs e)
+        {
+            FormEntidadeEquipasDetalhes formEquipas = new FormEntidadeEquipasDetalhes("Sockets", -1);
+            formEquipas.ShowDialog();
         }
+        #endregion
     }
 }

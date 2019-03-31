@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cap09_Winforms_TrabalhoPratico
@@ -84,7 +78,7 @@ namespace Cap09_Winforms_TrabalhoPratico
                 case "Gravar":
 
                     // Se campos vazios, erro. Caso contrário passa os dados para a formUm
-                    if (textBoxNome.Text == "" || textBoxAltura.Text == "" || textBoxIdade.Text == "")
+                    if (textBoxNome.Text == "" || textBoxIdade.Text == "" || textBoxAltura.Text == "" || textBoxPosicao.Text == "" || comboBoxEquipa.SelectedIndex == -1)
                     {
                         MessageBox.Show("A Equipa não pode ser criada, porfavor preencha todos os espaços.");
                     }

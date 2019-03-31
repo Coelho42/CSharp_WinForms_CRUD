@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cap09_Winforms_TrabalhoPratico
@@ -15,6 +8,7 @@ namespace Cap09_Winforms_TrabalhoPratico
         #region Variáveis
         string strAction;
         int selectedIndex;
+        // Propriedades locais alimentadas pelo Construtor e Usadas nos métodos Load() e ButtonAction
         #endregion
 
         #region Initalize

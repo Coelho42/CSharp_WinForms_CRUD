@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Windows.Forms;
 using static Cap09_Winforms_TrabalhoPratico.Sockets.Tools;
 
 namespace Cap09_Winforms_TrabalhoPratico.Sockets
@@ -191,27 +192,21 @@ namespace Cap09_Winforms_TrabalhoPratico.Sockets
 
                 switch (msgCode)
                 {
-                    case "MSG_PERSON":
+                    case "MSG_EQUIPA":
                         // A partir do byte 10, o array contém os dados do obj Pessoa 
                         // => contrutor com desSerialização
-                        //Pessoa person = new Pessoa(buffer);
+                        Equipa equipa = new Equipa(buffer);
+                        MessageBox.Show(equipa.nome + " " + equipa.convocada + " " + equipa.liga);
 
                         // Adicão da pessoa à DataGrid
                         // A FormServer foi passada para um atributo local, 
                         // desta class para a thread possa aceder de forma
                         // segura ao método da thread principal que insere
                         // dados na DataGridView.
-                        //formWork.SubmitPersonToDataGrid(person);
+                        formWork.SubmitEquipaToDataGrid(equipa);
                         break;
 
-                    case "MSG_STRING":
-                        // Extrai a partir do byte 10, uma string de tamanho received - a msgCode)
-                        string message = Encoding.UTF8.GetString(buffer, 10, messageLengthReceived - 10);
-
-                        formWork.UpdateTextBoxStringsReceived(message);
-                        break;
-
-                    case "MSG_SV_OK":
+                    case "MSG__SV_OK":
                         // Atualização dos objetos da form
                         formWork.UpdateControlStates(true);
                         break;
